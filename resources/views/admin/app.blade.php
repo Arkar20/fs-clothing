@@ -16,12 +16,12 @@
            [x-cloak=""] { display: none; }
     </style>
 </head>
-<body style="background-color: #F2F2F2" x-data="{drawer:false}" class="position-relative">
-    {{-- app bar --}}
                     <x-livewire-alert::scripts />
+<body  x-data="{drawer:false}" class="position-relative">
+           {{-- app bar --}}
 
-    <div class="flex justify-between p-3 md:p-6 shadow-lg bg-white">
-        <div class="logo-section flex justify-center gap-5 items-center">
+    <div class="flex justify-between px-3 md:py-2 shadow-sm bg-white">
+        <div class="logo-section flex justify-center space-x-3 items-center">
                 <div class="menu align-bottom">
                 <button class="" @click="drawer=!drawer">
                 <img src="{{ asset('assets/menu.svg')}} "/>
@@ -41,11 +41,9 @@
         @include('admin.navbar')
     {{-- end of navigation --}}
 
-<div
-  
->
-     {{ $slot ?? '' }}
-</div>
+<main class="mt-14">
+    {{ $slot ?? '' }}
+</main>
 
 
     

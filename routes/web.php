@@ -31,6 +31,9 @@ Route::get('/supplier', SupplierSection::class);
 Route::get('/delivery', DeliverySection::class);
 Route::get('/department', DepartmentSection::class);
 
+Route::get('/products', function () {
+    return view('admin.products.index');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })
