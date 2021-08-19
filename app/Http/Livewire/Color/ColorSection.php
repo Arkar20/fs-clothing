@@ -12,11 +12,15 @@ class ColorSection extends Component
 {
     use ToastTrait, CloseModelTrait, WithPagination;
 
+    protected $listeners = ['confirmed', 'cancelled'];
+
     public $search;
     public $color;
     public $color_code;
 
     public $colorToUpdate;
+
+    public $colorToDelete;
 
     public function store()
     {
@@ -48,8 +52,17 @@ class ColorSection extends Component
     }
     public function delete(Color $color)
     {
-        $color->delete();
-        $this->errorAlert('Color Deleted Successful');
+        $this->colorToDelete = $color;
+        $this->confirmDialog();
+    }
+    public function confirmed()
+    {
+        $this->colorToDelete->delete();
+        $this->successAlert('Color has been deleted Permently!');
+    }
+    public function FunctionName(): Response
+    {
+        return $this->render('$0.html.twig', []);
     }
     public function clearForm()
     {

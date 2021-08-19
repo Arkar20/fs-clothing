@@ -31,4 +31,19 @@ trait ToastTrait
             'showConfirmButton' => false,
         ]);
     }
+    public function confirmDialog(
+        $messageDialog = 'Are You Sure You Want To Delete This?'
+    ) {
+        return $this->confirm($messageDialog, [
+            'toast' => false,
+            'position' => 'center',
+            'showConfirmButton' => true,
+            'cancelButtonText' => 'Cancel',
+            'onConfirmed' => 'confirmed',
+            'onCancelled' => 'cancelled',
+        ]);
+    }
+    public function cancelled()
+    {
+    }
 }

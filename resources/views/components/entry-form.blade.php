@@ -1,6 +1,7 @@
 <div
-
-  class="my-4"
+    x-cloak
+        class="my-4 bg-black"
+           
 >
     <!-- Trigger for Modal -->
 
@@ -8,17 +9,21 @@
 
     <!-- Modal -->
     <div
-        class=" fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-black bg-opacity-50"
-        x-show="showModal"
-       
+        class="bg-black fixed inset-0 z-30 flex items-center justify-center overflow-auto  bg-opacity-50"
+         x-show.transition.duration-100ms="showModal"
+  
     >
+  
         <!-- Modal inner -->
         <div
-            class="max-w-3xl lg:px-24 lg:py-10 px-12 py-6 mx-auto text-left bg-white rounded-lg shadow-lg"
+            class="max-w-3xl lg:px-24 lg:py-10 px-12 py-6 mx-auto text-left transform bg-white rounded-lg shadow-lg"
             @click.away="showModal = false;showUpdate=false"
-            x-transition:enter="motion-safe:ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-90"
-            x-transition:enter-end="opacity-100 scale-100"
+             x-show="showModal"
+            x-transition.duration.600ms
+            x-transition.duration:enter="ease-out duration-300"
+            x-transition.duration:enter-start="opacity-0 translate-y-full sm:scale-100"
+            x-transition.duration:enter-end="opacity-100 translate-y-0 sm:scale-100"
+           
         >
             <!-- Title / Close-->
             <div class="flex items-center justify-between">
@@ -40,10 +45,14 @@
             </div>
 
             <!-- content -->
-            <div>{{$slot}}
-                 <button class="btn m-2" wire:click='clearForm' @click="showModal=false;showUpdate=false">Cancel</button>
+            <div>
+                
+                {{$slot}}
+                
+                <button class="btn m-2" wire:click='clearForm' @click="showModal=false;showUpdate=false">Cancel</button>
 
             </div>
         </div>
+   
     </div>
 </div>

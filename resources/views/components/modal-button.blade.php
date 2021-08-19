@@ -1,3 +1,9 @@
 <div>
-      <button type="button" @click="showModal = true" class="btn btn-md btn-primary">{{$slot}}</button>
+      <button type="button" 
+            @click="
+                  showModal = true
+                  $nextTick(()=>$refs.fieldToFocus.focus())
+                  " 
+            
+            class="btn btn-md btn-primary">{{$slot}}</button>
 </div>

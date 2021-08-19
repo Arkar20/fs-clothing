@@ -20,7 +20,7 @@ class CreateSuppliersTable extends Migration
             $table->string('hotline1', 15);
             $table->string('hotline2', 15);
             $table->string('company_name', 50);
-            $table->string('address', 70);
+            $table->string('address');
             $table->timestamps();
         });
     }

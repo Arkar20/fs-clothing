@@ -1,4 +1,6 @@
- <div x-data="{ showModal: false,showUpdate:false }"
+ <div 
+ x-data="{ showModal: false,showUpdate:false }"
+ 
   @close-modal.window="showModal = false"
   @keydown.escape="showModal = false"  
   >
@@ -25,14 +27,17 @@
 
 {{-- start of modal form --}}
  <x-entry-form label="Brand">
-      <x-text-field label="Brand Name" wire:model='name' value="{{$name}}" />
+   
+      <x-text-field label="Brand Name" wire:model='name' value="{{$name}}" x-ref="fieldToFocus"  />
              
       <x-text-field label="Company" wire:model='company' value="{{$company}}" />
 
       <x-text-area placeholder="Description" wire:model='desc' value="{{$desc}}" />
-     <div  x-show="!showUpdate" class="inline">
+    
+      <div  x-show="!showUpdate" class="inline">
        <x-loading-confirm wire:target="store"/>
      </div>
+
      <Button class="btn btn-accent" x-show="showUpdate" wire:click="update" >Update</Button>
   </x-entry-form>
 {{-- end of modal form --}}

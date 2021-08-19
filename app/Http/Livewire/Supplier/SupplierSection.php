@@ -20,6 +20,9 @@ class SupplierSection extends Component
     public $company_name;
     public $address;
     public $supplierToUpdate;
+    public $supplierToDelete;
+
+    protected $listeners = ['confirmed', 'cancelled'];
 
     public function store()
     {
@@ -62,8 +65,13 @@ class SupplierSection extends Component
     }
     public function delete(Supplier $supplier)
     {
-        $supplier->delete();
-        $this->errorAlert('Supplier Delete Successful');
+        $this->supplierToDelete = $supplier;
+        $this->confirmDialog();
+    }
+    public function confirmed()
+    {
+        $this->supplierToDelete->delete();
+        $this->successAlert('Supplier has deleted permanently.');
     }
 
     public function clearForm()

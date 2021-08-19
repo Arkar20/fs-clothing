@@ -5,7 +5,7 @@
 
     <x-search-section>
         <x-slot name="left">
-                <x-text-field  wire:model='search' autofocus/>
+                <x-text-field  wire:model='search'  />
                 <Button type="date"> 
 
                   <svg xmlns="http://www.w3.org/2000/svg" width="27" height="30" viewBox="0 0 27 30">
@@ -22,7 +22,7 @@
     </x-search-section>
 
  <x-entry-form label="Category">
-      <x-text-field label="Category Name" wire:model='category' value="{{$category}}" />
+      <x-text-field label="Category Name" wire:model='category' value="{{$category}}" x-ref="fieldToFocus"/>
      
      <div  x-show="!showUpdate" class="inline">
        <x-loading-confirm wire:target="store"/>

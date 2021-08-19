@@ -24,7 +24,7 @@
 
 {{-- start of modal form --}}
  <x-entry-form label="Color">
-      <x-text-field label="Color" wire:model='color' value="{{$color}}" />
+      <x-text-field label="Color" wire:model='color' value="{{$color}}"  x-ref="fieldToFocus"/>
       <x-text-field label="Color Code" wire:model='color_code' value="{{$color_code}}" />
      
      <div  x-show="!showUpdate" class="inline">

@@ -23,16 +23,21 @@
     <div class="flex justify-between px-3 md:py-2 shadow-sm bg-white">
         <div class="logo-section flex justify-center space-x-3 items-center">
                 <div class="menu align-bottom">
+                    
                 <button class="" @click="drawer=!drawer">
-                <img src="{{ asset('assets/menu.svg')}} "/>
-            </button>
-                </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </button>
+            
+            </div>
                 <div class="logo">
-                    <h1 class="text-md md:text-2xl text-gray-400 uppercase">FS CLothing Admin Panel</h1>
+                    <h1 class="text-md md:text-2xl text-gray-400 uppercase">F</h1>
                 </div>
         </div>
-        <div class="rounded-full md:w-14 md:h-14 w-10 h-10 bg-red-300">
-            <img src="https://images.unsplash.com/photo-1598226863630-2826f1d31532?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" class="rounded-full h-full w-full"/>
+        <div class="flex-none">
+            <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairTheCaesarSidePart&accessoriesType=Sunglasses&hairColor=BrownDark&facialHairType=BeardMajestic&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Gray01&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Twinkle&skinColor=Light" 
+            class="md:w-12 md:h-12 w-10 h-10 rounded-full"/>
         </div>
     </div>
     {{-- end of app bar --}}
@@ -41,7 +46,7 @@
         @include('admin.navbar')
     {{-- end of navigation --}}
 
-<main class="mt-14">
+<main >
     {{ $slot ?? '' }}
 </main>
 

@@ -23,8 +23,11 @@
 {{-- end of search bar --}}
 
 {{-- start of modal form --}}
- <x-entry-form label="Supplier">
-      <x-text-field label="Name" wire:model='name' value="{{$name}}" />
+ <x-entry-form 
+    label="Supplier"
+    
+ >
+      <x-text-field label="Name" wire:model='name' value="{{$name}}"  x-ref="fieldToFocus" />
       <x-text-field label="Email" wire:model='email' value="{{$email}}" />
       <x-text-field label="Hot-Line (1)" wire:model='hotline1' value="{{$hotline1}}" />
       <x-text-field label="Hot-Line (2)" wire:model='hotline2' value="{{$hotline2}}" />

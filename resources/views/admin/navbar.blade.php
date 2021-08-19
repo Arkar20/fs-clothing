@@ -1,19 +1,60 @@
  {{-- start of nav --}}
-    <ul x-show="drawer" 
-          x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="transform opacity-0 scale-95"
-            x-transition:enter-end="transform opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-40"
-            x-transition:leave-start="transform opacity-100 scale-100"
-            x-transition:leave-end="transform opacity-0 scale-95"
-    
-    class="absolute h-full z-20 overflow-auto transition-all duration-300  bg-white text-base-content  border border-1">
-      <li>
-            <a class="text-center p-2 md:p-4 w-full fill-current  text-gray-700 hover:bg-purple-800 hover:text-white cursor-pointer flex  ">
-                <svg class="w-10 md:w-20" xmlns="http://www.w3.org/2000/svg" width="23" height="21.337" viewBox="0 0 23 21.337">
-                    <path id="Icon_material-dashboard" data-name="Icon material-dashboard" d="M4.5,16.354H14.722V4.5H4.5Zm0,9.483H14.722V18.725H4.5Zm12.778,0H27.5V13.983H17.278Zm0-21.337v7.112H27.5V4.5Z" transform="translate(-4.5 -4.5)"  />
-                </svg>
-            <span >DashBoard</span>
+ <div>
+<div 
+    x-cloak
+    x-show="drawer" 
+    class="absolute top-18 right-0 bg-black opacity-40 w-screen h-screen"></div>
+
+    <ul 
+    @click.away="drawer=false"
+    x-cloak
+    x-show.transtion.duration-400ms="drawer"
+    x-transition.duration:enter="ease-out duration-300"
+    x-transition.duration:enter-start="opacity-0 -translate-x-full sm:scale-100"
+    x-transition.duration:enter-end="opacity-100 translate-x-0 sm:scale-100"
+    x-transition.duration:leave="ease-out duration-200"
+    x-transition.duration:leave-start="opacity-100 translate-x-0 sm:scale-100"
+    x-transition.duration:leave-end="opacity-0 -translate-x-full sm:scale-100"
+    class="absolute  w-64 h-screen transform   z-20 overflow-auto transition-all duration-300  bg-white text-base-content  border border-1 ">
+      
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        <div class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Dashboard</span>
+        </div>
+    </li>
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        
+        <a  href="/brand" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Brand</span>
+        </a>
+    </li>
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        <a href="/category" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Category</span>
+        </a>
+    </li>
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        <a href="/color" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Color</span>
+        </a>
+    </li>
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        <a href="/supplier" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Supplier</span>
+        </a>
+    </li>
+{{--    
+      <li class="flex justify-center my-4"> 
+            <a class="text-center p-2 md:p-4 w-44  fill-current  text-gray-700 hover:bg-purple-800 hover:text-white cursor-pointer flex ">
+                <svg class="w-10 md:w-20" xmlns="http://www.w3.org/2000/svg" width="25" height="17.395" viewBox="0 0 25 17.395">
+                    <path id="Icon_metro-profile" data-name="Icon metro-profile" d="M27.713,10.2H25.965V7.763l-3.609-.051.019,2.485H11.53L11.6,7.712,8.07,7.763v2.485L6.284,10.2A1.725,1.725,0,0,0,4.5,11.854v11.6a1.725,1.725,0,0,0,1.786,1.657H27.713A1.725,1.725,0,0,0,29.5,23.45v-11.6A1.725,1.725,0,0,0,27.713,10.2ZM23.249,8.54h1.786v3.313H23.249ZM11.642,14.183A2.2,2.2,0,0,1,13.6,16.564a2.2,2.2,0,0,1-1.954,2.381,2.2,2.2,0,0,1-1.954-2.381,2.2,2.2,0,0,1,1.954-2.381ZM8.963,8.54h1.786v3.313H8.963ZM7.773,21.75s.212-1.575.693-1.873a7.268,7.268,0,0,1,1.866-.5s.9.89,1.28.89,1.279-.89,1.279-.89a7.246,7.246,0,0,1,1.867.5c.565.35.706,1.873.706,1.873H7.773Zm18.154-.785H17.892v-.828h8.036Zm0-1.657H17.892V18.48h8.036Zm0-1.657H17.892v-.828h8.036Zm0-1.657H17.892v-.828h8.036Z" transform="translate(-4.499 -7.712)" />
+             </svg>
+            <span >Dashboard</span>
             </a>
       </li> 
       <li>
@@ -45,7 +86,8 @@
                 </div>
             </button>
                
-      </li>
+      </li> --}}
       
     </ul>
+     </div>
     {{-- end of nav --}}

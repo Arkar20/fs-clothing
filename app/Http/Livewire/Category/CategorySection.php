@@ -11,12 +11,15 @@ use Livewire\WithPagination;
 class CategorySection extends Component
 {
     use ToastTrait, WithPagination, CloseModelTrait;
+    protected $listeners = ['confirmed', 'cancelled'];
 
     public $category;
     public $search;
 
     //update
     public $categoryToUpdate;
+
+    public $categoryToDelete;
 
     public function store()
     {
@@ -28,14 +31,21 @@ class CategorySection extends Component
     }
     public function delete(Category $category)
     {
-        $category->delete();
-        $this->successAlert('Category Deleted');
+        $this->confirmDialog();
+        $this->categoryToDelete = $category;
     }
     public function edit(Category $category)
     {
         $this->categoryToUpdate = $category;
         $this->category = $category->category;
     }
+    public function confirmed()
+    {
+        $this->categoryToDelete->delete();
+
+        $this->successAlert('Category Has Deleted Permently');
+    }
+
     public function update()
     {
         $this->categoryToUpdate->update(['category' => $this->category]);

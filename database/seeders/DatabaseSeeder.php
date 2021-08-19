@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Item;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Category;
@@ -39,5 +40,7 @@ class DatabaseSeeder extends Seeder
         Delivery::factory()
             ->count(10)
             ->create();
+
+        Item::factory(10)->create();
     }
 }

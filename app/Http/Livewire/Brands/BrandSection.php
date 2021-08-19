@@ -11,6 +11,7 @@ use App\Http\Traits\ToastTrait;
 class BrandSection extends Component
 {
     use WithPagination, ToastTrait, CloseModelTrait;
+    protected $listeners = ['confirmed', 'cancelled'];
 
     public $name;
     public $company;
@@ -19,6 +20,9 @@ class BrandSection extends Component
     public $brandToUpdate;
     //search
     public $search;
+    //brand to delete
+    public $brandToDelete;
+
     public function store()
     {
         $brand = Brand::create([
@@ -52,8 +56,18 @@ class BrandSection extends Component
     }
     public function delete(Brand $brand)
     {
-        $brand->delete();
-        $this->successAlert('Delete Successful!');
+        $this->confirmDialog();
+        $this->brandToDelete = $brand;
+    }
+
+    public function confirmed()
+    {
+        $this->brandToDelete->delete();
+
+        $this->alert('success', 'A Brand Has Been Permently Deleted!');
+    }
+    public function cancelled()
+    {
     }
     public function clearForm()
     {
