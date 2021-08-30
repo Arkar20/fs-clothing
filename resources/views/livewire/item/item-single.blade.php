@@ -61,7 +61,7 @@
                     </div>    
 
                     <div class="flex justify-center">
-                        <a href="{{route('products.single', $item->name)}}" class="w-48 py-3 text-center  rounded-md bg-purple-500 shadow-md text-white">Inventory</a>
+                        <a href="{{route('items.edit', $item->name)}}" class="w-48 py-3 text-center  rounded-md bg-purple-500 shadow-md text-white">Inventory</a>
                     </div>
                     </div>
                 </div>

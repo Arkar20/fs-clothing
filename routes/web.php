@@ -1,15 +1,13 @@
 <?php
 
-use App\Models\Supplier;
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
 use App\Http\Livewire\Deliver\DeliverySection;
+use App\Http\Livewire\Item\Registerproduct;
 use App\Http\Livewire\Category\CategorySection;
 use App\Http\Livewire\Supplier\SupplierSection;
-use App\Http\Livewire\Department\DepartmentSection;
-use App\Http\Livewire\Product\Registerproduct;
-use App\Models\Item;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +33,13 @@ Route::get('/delivery', DeliverySection::class);
 Route::get('/items/register', Registerproduct::class)->name('item.register');
 
 Route::get('/items', function () {
-    return view('admin.products.index');
+    return view('admin.items.index');
 });
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('products.single');
 Route::get('/items/{item:name}', function (Item $item) {
-    return $item->name;
-})->name('products.single');
+    return view('admin.items.edit', ['item' => $item]);
+})->name('items.edit');
 
 require __DIR__ . '/auth.php';

@@ -49,7 +49,11 @@ class Items extends Component
                     );
                 })
                 ->when($this->search, function ($item) {
-                    return $item->where('name', $this->search);
+                    return $item->where(
+                        'name',
+                        'LIKE',
+                        '%' . $this->search . '%'
+                    );
                 })
 
                 ->latest()
