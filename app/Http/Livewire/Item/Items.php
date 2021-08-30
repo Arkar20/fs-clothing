@@ -3,12 +3,30 @@
 namespace App\Http\Livewire\Item;
 
 use App\Models\Item;
+use App\Models\Brand;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
+use App\Http\Traits\FilterFieldTrait;
 
 class Items extends Component
 {
-    use WithPagination;
+    use WithPagination, FilterFieldTrait;
+    public $brand;
+    public $category;
+    public $search;
+
+    public $queryString = ['brand', 'category'];
+
+    public function updated()
+    {
+        if ($this->brand == '') {
+            $this->brand = null;
+        } elseif ($this->category == '') {
+            $this->category = null;
+        }
+        $this->resetPage();
+    }
 
     public function selectToDisplay(Item $item)
     {
@@ -17,8 +35,27 @@ class Items extends Component
 
     public function render()
     {
+        $categories = Category::all()->pluck('id', 'category');
+        $brands = Brand::all()->pluck('id', 'name');
+
         return view('livewire.item.items', [
-            'items' => Item::latest()->paginate(16),
+            'items' => Item::when($this->brand, function ($item) use ($brands) {
+                return $item->where('brand_id', $brands->get($this->brand));
+            })
+                ->when($this->category, function ($item) use ($categories) {
+                    return $item->where(
+                        'category_id',
+                        $categories->get($this->category)
+                    );
+                })
+                ->when($this->search, function ($item) {
+                    return $item->where('name', $this->search);
+                })
+
+                ->latest()
+                ->paginate(16),
+            'brands' => Brand::all(),
+            'categories' => Category::all(),
         ]);
     }
 }

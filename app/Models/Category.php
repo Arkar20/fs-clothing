@@ -12,4 +12,9 @@ class Category extends Model
     use HasFactory, TableHeadersTrait, FilterFieldTrait;
 
     protected $guarded = [];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

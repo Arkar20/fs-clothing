@@ -27,8 +27,8 @@
         >
             <!-- Title / Close-->
             <div class="flex items-center justify-between">
-                <h5 class="mr-3 text-black max-w-none" x-show="showUpdate">Update {{$label}}</h5>
-                <h5 class="mr-3 text-black max-w-none"x-show="!showUpdate">Register {{$label}}</h5>
+                <h5 class="w-full  mr-3 text-black max-w-none" x-show="showUpdate">Update {{$label}}</h5>
+                <h5 class="w-full mr-3 text-black max-w-none"x-show="!showUpdate">Register {{$label}}</h5>
 
                 <button type="button" class="z-50 cursor-pointer" @click="showModal = false;showUpdate=false"  wire:click='clearForm'>
                    
@@ -45,13 +45,13 @@
             </div>
 
             <!-- content -->
-            <div>
+            <form wire:submit.prevent="store">
                 
                 {{$slot}}
                 
-                <button class="btn m-2" wire:click='clearForm' @click="showModal=false;showUpdate=false">Cancel</button>
+                <button type="reset" class="btn m-2" wire:click='clearForm' @click="showModal=false;showUpdate=false">Cancel</button>
 
-            </div>
+            </form>
         </div>
    
     </div>

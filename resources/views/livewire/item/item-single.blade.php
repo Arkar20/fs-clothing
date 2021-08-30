@@ -1,6 +1,6 @@
 <div>
 @if($item)
- <div class="hidden md:block w-1/4 bg-white mt-2 rounded-lg shadow-sm  border border-1 border-gray-200 fixed right-0">
+ <div class="hidden md:block transition duration-400 w-1/4 bg-white mt-2 rounded-lg shadow-sm  border border-1 border-gray-200 fixed right-0">
                 {{-- start of preview section     --}}
             <div class="flex items-center p-4 space-x-4">
                 <svg  class="h-4 w-4 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,7 +61,7 @@
                     </div>    
 
                     <div class="flex justify-center">
-                        <button class="w-48 h-12 rounded-md bg-purple-500 shadow-md text-white">Inventory</button>
+                        <a href="{{route('products.single', $item->name)}}" class="w-48 py-3 text-center  rounded-md bg-purple-500 shadow-md text-white">Inventory</a>
                     </div>
                     </div>
                 </div>

@@ -13,6 +13,10 @@ class ColorSection extends Component
     use ToastTrait, CloseModelTrait, WithPagination;
 
     protected $listeners = ['confirmed', 'cancelled'];
+    protected $rules = [
+        'color' => 'required|min:2',
+        'color_code' => 'required|min:7',
+    ];
 
     public $search;
     public $color;
@@ -24,6 +28,7 @@ class ColorSection extends Component
 
     public function store()
     {
+        $this->validate();
         Color::create([
             'color' => $this->color,
             'color_code' => $this->color_code,
@@ -35,12 +40,16 @@ class ColorSection extends Component
     }
     public function edit(Color $color)
     {
+        $this->resetErrorBag();
+
         $this->colorToUpdate = $color;
         $this->color = $color->color;
         $this->color_code = $color->color_code;
     }
     public function update()
     {
+        $this->validate();
+
         $this->colorToUpdate->update([
             'color' => $this->color,
             'color_code' => $this->color_code,

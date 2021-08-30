@@ -3,7 +3,7 @@
 <div 
     x-cloak
     x-show="drawer" 
-    class="absolute top-18 right-0 bg-black opacity-40 w-screen h-screen"></div>
+    class="z-10 absolute top-18 right-0 bg-black opacity-40 w-screen h-screen"></div>
 
     <ul 
     @click.away="drawer=false"
@@ -30,6 +30,28 @@
              <span class="text-left">Brand</span>
         </a>
     </li>
+
+    {{-- product showroom  --}}
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        
+        <a  href="/items" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Showroom</span>
+        </a>
+    </li>
+    {{-- product showroom --}}
+    
+    {{-- product register  --}}
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        
+        <a  href="/items/register" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Register Product</span>
+        </a>
+    </li>
+    {{-- product register --}}
+
+
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         <a href="/category" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            

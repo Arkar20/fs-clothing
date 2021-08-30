@@ -12,6 +12,7 @@ class CategorySection extends Component
 {
     use ToastTrait, WithPagination, CloseModelTrait;
     protected $listeners = ['confirmed', 'cancelled'];
+    protected $rules = ['category' => 'required|min:3'];
 
     public $category;
     public $search;
@@ -23,6 +24,8 @@ class CategorySection extends Component
 
     public function store()
     {
+        $this->validate();
+
         Category::create(['category' => $this->category]);
         $this->clearForm();
         $this->closeModal();
@@ -36,6 +39,8 @@ class CategorySection extends Component
     }
     public function edit(Category $category)
     {
+        $this->resetErrorBag();
+
         $this->categoryToUpdate = $category;
         $this->category = $category->category;
     }
@@ -48,6 +53,8 @@ class CategorySection extends Component
 
     public function update()
     {
+        $this->validate();
+
         $this->categoryToUpdate->update(['category' => $this->category]);
         $this->successAlert('Category Updated');
         $this->closeModal();

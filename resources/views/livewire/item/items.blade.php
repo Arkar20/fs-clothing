@@ -6,26 +6,58 @@
                 })
 
                 "
-        
-        :class="selected?'md:w-3/4 ':'w-100 mx-auto'"
-        class="  transition duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300">
-            <p class="text-xl font-semibold flex justify-center py-2 ">Product Showroom</p>
+        x-transition="transition-width ease-in"
+        :class="selected?'md:w-3/4 ':'min-w-full mx-auto  '">
+
+                {{-- banner --}}
+                <div class="w-100 flex justify-between items-center mx-12 ">
+                     <h2 class="title px-4  text-2xl font-bold">Product Showroom</h2>
+
+                     <a href="/items/register" class="w-48 flex justify-center items-center space-x-2 btn-md btn-primary rounded-md" @click="
+                        ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Register Product</span>
+                    </a>
+                </div>
+                {{-- banner --}}
+                
+       <div class="mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300">
             {{-- start of search panel   --}}
                 <x-search-section>
                     <x-slot name="left">
-                           <x-dropdownfield />
-                           <x-dropdownfield />
-                           <x-dropdownfield />
+                           <x-dropdownfield label="All Brands" :options="$brands" model="brand"/>
+                           <x-dropdownfield label="All Categories" :options="$categories" model="category"/>
+                         
                     </x-slot>
                    
                     <x-slot name="right">
+                         <x-text-field 
+                                 model="search"
+                                 placeholder="Please Type and search"
+                                 autofocus />
                     </x-slot>
                  </x-search-section>
             
             {{-- end of search pannel  --}}
-            <div  class="products-section  mt-4 grid grid-cols-2 md:grid-cols-4 px-10 gap-4">
-                 
-                @foreach ($items as $item)
+
+            @if ($brand || $category)
+                <p class="px-10">You are filtering with
+                    
+                    {!!$brand?'<span class="font-bold">Brand </span> " '.$brand.'".':''!!} 
+                    
+                    
+                    {!!$category?'<span class="font-bold">Category "</span>'.$category.'"':''!!}
+
+                    {!!$search?'<span class="font-bold">Search "</span>'.$search.'"':''!!}
+                
+                </p>
+            @endif
+
+
+            <div  class="products-section   mt-4 grid grid-cols-2 md:grid-cols-4 px-10 gap-4">
+                @forelse ($items as $item)
                 {{-- start of product single --}}
                
                 <div 
@@ -46,10 +78,14 @@
                     </div>
                 </div>
                   {{-- end of product single --}}
-                @endforeach
+
+                @empty
+                <p class="col-span-4 text-center text-3xl font-semibold">No Items Found...</p>
+                @endforelse
                        
             </div>
             <div class="flex justify-between px-4 py-3">
                 {{$items->links()}}
             </div>
         </div>
+    </div>

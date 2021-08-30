@@ -7,6 +7,8 @@ use App\Models\Supplier;
 use Livewire\WithPagination;
 use App\Http\Traits\ToastTrait;
 use App\Http\Traits\CloseModelTrait;
+use Illuminate\Support\ViewErrorBag;
+use Illuminate\Support\Facades\Session;
 
 class SupplierSection extends Component
 {
@@ -24,8 +26,19 @@ class SupplierSection extends Component
 
     protected $listeners = ['confirmed', 'cancelled'];
 
+    protected $rules = [
+        'name' => 'required|min:3|max:100',
+        'email' => 'required|email',
+        'hotline1' => 'required|number',
+        'hotline2' => 'required|number',
+        'company_name' => 'required|min:3|max:255',
+        'address' => 'required|min:3|max:255',
+    ];
+
     public function store()
     {
+        $this->validate();
+
         Supplier::create([
             'name' => $this->name,
             'email' => $this->email,
@@ -41,6 +54,8 @@ class SupplierSection extends Component
     }
     public function edit(Supplier $supplier)
     {
+        $this->resetErrorBag();
+
         $this->supplierToUpdate = $supplier;
         $this->name = $supplier->name;
         $this->email = $supplier->email;
@@ -51,6 +66,8 @@ class SupplierSection extends Component
     }
     public function update()
     {
+        $this->validate();
+
         $this->supplierToUpdate->update([
             'name' => $this->name,
             'email' => $this->email,

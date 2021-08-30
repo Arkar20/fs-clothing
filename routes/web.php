@@ -8,6 +8,8 @@ use App\Http\Livewire\Deliver\DeliverySection;
 use App\Http\Livewire\Category\CategorySection;
 use App\Http\Livewire\Supplier\SupplierSection;
 use App\Http\Livewire\Department\DepartmentSection;
+use App\Http\Livewire\Product\Registerproduct;
+use App\Models\Item;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +31,17 @@ Route::get('/category', CategorySection::class);
 Route::get('/color', ColorSection::class);
 Route::get('/supplier', SupplierSection::class);
 Route::get('/delivery', DeliverySection::class);
-Route::get('/department', DepartmentSection::class);
+Route::get('/delivery', DeliverySection::class);
+Route::get('/items/register', Registerproduct::class);
 
-Route::get('/products', function () {
+Route::get('/items', function () {
     return view('admin.products.index');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})
-    ->middleware(['auth'])
-    ->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('products.single');
+Route::get('/items/{item:name}', function (Item $item) {
+    return $item->name;
+})->name('products.single');
 
 require __DIR__ . '/auth.php';

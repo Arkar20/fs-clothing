@@ -10,14 +10,18 @@ class TextField extends Component
      * Create a new component instance.
      *
      * @return void
+     *
+     *
      */
     public $label;
     public $type;
+    public $model;
 
-    public function __construct($label = null, $type = 'text')
+    public function __construct($label = null, $type = 'text', $model = null)
     {
         $this->label = $label;
         $this->type = $type;
+        $this->model = $model;
     }
 
     /**

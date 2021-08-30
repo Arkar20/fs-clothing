@@ -11,7 +11,13 @@ use App\Http\Traits\ToastTrait;
 class BrandSection extends Component
 {
     use WithPagination, ToastTrait, CloseModelTrait;
+
     protected $listeners = ['confirmed', 'cancelled'];
+    protected $rules = [
+        'name' => 'required|min:4',
+        'company' => 'required|min:4',
+        'desc' => 'required|min:4',
+    ];
 
     public $name;
     public $company;
@@ -25,18 +31,23 @@ class BrandSection extends Component
 
     public function store()
     {
+        sleep(4);
+        $this->validate();
+
         $brand = Brand::create([
             'name' => $this->name,
             'company' => $this->company,
             'desc' => $this->desc,
         ]);
         $this->closeModal();
-        Brand::find($brand->id);
+        // Brand::find($brand->id);
         $this->clearForm();
         $this->successAlert('Brand Register Successful!');
     }
     public function edit(Brand $brand)
     {
+        $this->resetErrorBag();
+
         $this->brandToUpdate = $brand;
         $this->name = $brand->name;
         $this->company = $brand->company;
@@ -44,6 +55,8 @@ class BrandSection extends Component
     }
     public function update()
     {
+        $this->validate();
+
         $this->brandToUpdate->update([
             'name' => $this->name,
             'desc' => $this->desc,
@@ -66,9 +79,7 @@ class BrandSection extends Component
 
         $this->alert('success', 'A Brand Has Been Permently Deleted!');
     }
-    public function cancelled()
-    {
-    }
+
     public function clearForm()
     {
         $this->name = '';

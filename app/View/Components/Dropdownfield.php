@@ -11,9 +11,19 @@ class Dropdownfield extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $label;
+    public $options = [];
+    public $model;
+    public $name;
+    public function __construct($label, $options, $model)
     {
-        //
+        $this->label = $label;
+        $this->options = $options;
+        $this->model = $model;
+        $this->name = $options->first()->getHeaders()[1];
+
+        // dd($this->headers[1]);
     }
 
     /**

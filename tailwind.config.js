@@ -10,6 +10,9 @@ module.exports = {
 
     theme: {
         extend: {
+            transitionProperty: {
+                'width': 'width'
+            },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
