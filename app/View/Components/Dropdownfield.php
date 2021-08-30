@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Request;
 
 class Dropdownfield extends Component
 {
@@ -16,6 +17,7 @@ class Dropdownfield extends Component
     public $options = [];
     public $model;
     public $name;
+    public $value;
     public function __construct($label, $options, $model)
     {
         $this->label = $label;

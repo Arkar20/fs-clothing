@@ -32,7 +32,7 @@ Route::get('/color', ColorSection::class);
 Route::get('/supplier', SupplierSection::class);
 Route::get('/delivery', DeliverySection::class);
 Route::get('/delivery', DeliverySection::class);
-Route::get('/items/register', Registerproduct::class);
+Route::get('/items/register', Registerproduct::class)->name('item.register');
 
 Route::get('/items', function () {
     return view('admin.products.index');
