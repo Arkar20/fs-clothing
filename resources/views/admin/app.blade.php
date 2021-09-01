@@ -16,13 +16,41 @@
            [x-cloak=""] { display: none; }
     </style>
 </head>
-                    <x-livewire-alert::scripts />
-<body  x-data="{drawer:false}" class="position-relative">
-           {{-- app bar --}}
+
+
+ <x-livewire-alert::scripts />
+
+
+
+
+<body  
+    x-data="{drawer:false}"
+     x-init=" 
+     drawer=false
+                @if(session()->has('productRegistered'))
+                Swal.fire({
+                        icon: 'success',
+                        title: '{{session()->get('productRegistered')}}',
+                        })
+                @endif
+
+            
+                @if(session()->has('itemdeleted'))
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{session()->get('itemdeleted')}}',
+                        })
+                @endif
+                "
+    
+class="position-relative">
+    
+
+    {{-- app bar --}}
 
     <div class="flex justify-between px-3 md:py-2 shadow-sm bg-white">
         <div class="logo-section flex justify-center space-x-3 items-center">
-                <div class="menu align-bottom">
+            <div class="menu align-bottom">
                     
                 <button class="" @click="drawer=!drawer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,11 +78,12 @@
     {{ $slot ?? '' }}
 </main>
 
-
     
 
     @livewireScripts
 
 
+
 </body>
+
 </html>

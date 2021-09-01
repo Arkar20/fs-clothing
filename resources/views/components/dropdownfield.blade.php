@@ -12,4 +12,7 @@
                 </option>
         @endforeach
      </select>
+         @error($model)
+            <span class="text-red-600 font-bold text-xs">{{$message}}</span>
+        @enderror
 </div>

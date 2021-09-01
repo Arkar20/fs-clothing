@@ -1,5 +1,5 @@
 <div class="single-img my-2 border border-1 border-gray-100 shadow-lg">
-                    <img src="{{$tempimg}}" alt="img1" class="w-100 h-72 border boder-1 border-gray-200 shadow-lg ">
+                    <img src="{{  asset($tempimg) }}" alt="img1" class="w-100 h-72 border boder-1 border-gray-200 shadow-lg ">
                         <div class="flex justify-center">
                             <button
 
@@ -9,12 +9,15 @@
                                         <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
                                 </svg>
                                 <span >Upload</span>  
-                            <input
-                                     wire:model.defer="{{$img}}"
-                                    class="cursor-pointer   py-2 px-4 w-full opacity-0 pin-r pin-t"
-                                    type="file"
-                                  
-                                >
+                                <input
+                                        wire:model.defer="{{$img}}"
+                                        class="cursor-pointer   py-2 px-4 w-full opacity-0 pin-r pin-t"
+                                        type="file"
+                                    
+                                    >
                             </button>
                         </div>
+                         @error($img)
+                            <span class="text-red-600 font-bold text-xs">{{$message}}</span>
+                        @enderror
 </div>

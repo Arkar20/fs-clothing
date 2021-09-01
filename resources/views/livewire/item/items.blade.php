@@ -4,7 +4,9 @@
                 window.livewire.on('singleItemHasSelected',()=>{
                     selected=true
                 })
+            
 
+              
                 "
         x-transition="transition-width ease-in"
         :class="selected?'md:w-3/4 ':'min-w-full mx-auto  '">

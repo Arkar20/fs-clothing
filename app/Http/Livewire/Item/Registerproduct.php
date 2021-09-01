@@ -22,8 +22,22 @@ class Registerproduct extends Component
     public $img2;
     public $img3;
 
+    protected $rules = [
+        'name' => 'required|min:2|max:255|unique:items',
+        'price' => 'required|numeric',
+        'retail_price' => 'required|numeric',
+        'desc' => 'required|min:5|max:255',
+        'brand' => 'required',
+        'category' => 'required',
+        'img1' => 'required|mimes:jpg,png',
+        'img2' => 'required|mimes:jpg,png',
+        'img3' => 'required|mimes:jpg,png',
+    ];
+
     public function store()
     {
+        $this->validate();
+
         Item::create([
             'name' => $this->name,
             'price' => $this->price,
@@ -48,6 +62,12 @@ class Registerproduct extends Component
                 now() . $this->img3->getClientOriginalName()
             ),
         ]);
+        session()->flash(
+            'productRegistered',
+            'You Have successfully registered An Item.'
+        );
+
+        return redirect()->to('/items');
     }
 
     public function render()
