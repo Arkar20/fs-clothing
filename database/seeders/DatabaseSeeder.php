@@ -8,6 +8,7 @@ use App\Models\Color;
 use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\Supplier;
+use App\Models\ItemDetail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -42,5 +43,9 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Item::factory(10)->create();
+
+        ItemDetail::factory(10)->create([
+            'item_id' => Item::latest()->first()->id,
+        ]);
     }
 }

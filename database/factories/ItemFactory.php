@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Item;
+use App\Models\User;
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ItemFactory extends Factory
@@ -24,12 +27,13 @@ class ItemFactory extends Factory
         $price = $this->faker->numberBetween(30, 50);
         return [
             'name' => $this->faker->word(),
-            'desc' => $this->faker->paragraph(3),
-            'category_id' => rand(1, 10),
-            'brand_id' => rand(1, 10),
-            'user_id' => rand(1, 10),
+            'desc' => $this->faker->paragraph(1),
+            'category_id' => Category::factory()->create(),
+            'brand_id' => Brand::factory()->create(),
+            'user_id' => User::factory()->create(),
             'price' => $price,
             'retail_price' => $price - 10,
+            'total_qty' => 10,
             'img1' => '/photos/items/img' . rand(1, 10) . '.jpg',
             'img2' => '/photos/items/img' . rand(1, 10) . '.jpg',
             'img3' => '/photos/items/img' . rand(1, 10) . '.jpg',

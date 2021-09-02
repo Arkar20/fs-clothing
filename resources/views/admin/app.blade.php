@@ -33,6 +33,8 @@
                         title: '{{session()->get('productRegistered')}}',
                         })
                 @endif
+                
+               
 
             
                 @if(session()->has('itemdeleted'))

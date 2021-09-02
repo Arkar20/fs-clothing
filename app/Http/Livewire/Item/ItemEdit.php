@@ -20,6 +20,11 @@ class ItemEdit extends Component
     public $price;
     public $retail_price;
 
+    public function store()
+    {
+        return;
+    }
+
     public function mount(Item $item)
     {
         $this->item = $item;

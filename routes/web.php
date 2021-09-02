@@ -41,7 +41,7 @@ Route::get('/items', function () {
 // })->name('products.single');
 Route::get('/items/{item:name}', function (Item $item) {
     return view('admin.items.edit', [
-        'item' => $item,
+        'item' => $item->load('itemdetails'),
     ]);
 })->name('items.edit');
 

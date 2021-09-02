@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ItemDetail;
 use App\Http\Traits\FilterFieldTrait;
 use App\Http\Traits\TableHeadersTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,17 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function itemdetails()
+    {
+        return $this->hasMany(ItemDetail::class);
+    }
+    public function getDetailsFromLatest()
+    {
+        return $this->itemdetails()
+            ->latest()
+            ->get();
     }
 
     public function scopeFilterWithMetadata($query, $metadata, $field)

@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Schema;
 
 trait TableHeadersTrait
 {
-    public function getHeaders()
+    public function getHeaders($table = null)
     {
-        return Schema::getColumnListing($this->getTable());
+        return Schema::getColumnListing($table ?: $this->getTable());
     }
 }

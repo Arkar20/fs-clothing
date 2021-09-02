@@ -18,9 +18,9 @@ trait ToastTrait
         ]);
     }
 
-    public function errorAlert($message)
+    public function errorAlert($message = 'Delete Success')
     {
-        return $this->alert('error', 'Delete Success!', [
+        return $this->alert('error', $message, [
             'position' => 'top-end',
             'timer' => 3000,
             'toast' => true,
