@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Color extends Model
 {
-    use HasFactory, TableHeadersTrait, FilterFieldTrait;
+    use HasFactory, FilterFieldTrait;
 
     protected $guarded = [];
 }

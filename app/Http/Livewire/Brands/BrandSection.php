@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Brands;
 
-use App\Http\Traits\CloseModelTrait;
 use App\Models\Brand;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Traits\ToastTrait;
+use App\Http\Traits\CloseModelTrait;
+use App\Http\Traits\TableHeadersTrait;
 
 class BrandSection extends Component
 {
-    use WithPagination, ToastTrait, CloseModelTrait;
+    use WithPagination, ToastTrait, CloseModelTrait, TableHeadersTrait;
 
     protected $listeners = ['confirmed', 'cancelled'];
     protected $rules = [
@@ -94,7 +95,7 @@ class BrandSection extends Component
                 ->FilterSearch('desc', $this->search)
                 ->orderBy('updated_at', 'desc')
                 ->paginate(10),
-            'headers' => Brand::first()->getHeaders(),
+            'headers' => $this->getHeaders('brands'),
         ])->layout('admin.app');
     }
 }

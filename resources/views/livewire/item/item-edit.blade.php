@@ -196,6 +196,7 @@ class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="d
         <div x-show="name==='Edit Category'">
         <x-dropdownfield 
          x-ref="category"  
+         table="categories"
          label="All Categories" :options="$categories" model="category"/>
 
        </div>
@@ -204,6 +205,7 @@ class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="d
         <x-dropdownfield 
          x-ref="brand"
          label="All Categories" 
+         table="brands"
          :options="$brands" model="brand"/>
 
        </div>

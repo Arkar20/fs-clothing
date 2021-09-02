@@ -8,9 +8,13 @@
 
                 <x-entry-form label="New Size And Color" >
             
-                        <x-dropdownfield label="All Colors" :options="$colors" model="color" x-ref="fieldToFocus" />
+                        <x-dropdownfield label="All Colors" 
+                                        table="colors"
+                                        :options="$colors" model="color" x-ref="fieldToFocus" />
                         
-                        <x-dropdownfield label="All Size" :options="$sizes" model="size"  />
+                        <x-dropdownfield label="All Size" 
+                                        table="sizes"
+                                        :options="$sizes" model="size"  />
                                 
                         <x-text-field label="Quantity" model='quantity'  />
 

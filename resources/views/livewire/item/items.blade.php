@@ -29,8 +29,12 @@
             {{-- start of search panel   --}}
                 <x-search-section>
                     <x-slot name="left">
-                           <x-dropdownfield label="All Brands" :options="$brands" model="brand"/>
-                           <x-dropdownfield label="All Categories" :options="$categories" model="category"/>
+                           <x-dropdownfield label="All Brands"
+                                            table="brands" 
+                                            :options="$brands" model="brand"/>
+                           <x-dropdownfield label="All Categories"
+                                            table="categories"
+                                            :options="$categories" model="category"/>
                          
                     </x-slot>
                    

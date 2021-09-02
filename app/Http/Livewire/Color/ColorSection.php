@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Color;
 
-use App\Http\Traits\CloseModelTrait;
-use App\Http\Traits\ToastTrait;
 use App\Models\Color;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Http\Traits\ToastTrait;
+use App\Http\Traits\CloseModelTrait;
+use App\Http\Traits\TableHeadersTrait;
 
 class ColorSection extends Component
 {
-    use ToastTrait, CloseModelTrait, WithPagination;
+    use ToastTrait, CloseModelTrait, WithPagination, TableHeadersTrait;
 
     protected $listeners = ['confirmed', 'cancelled'];
     protected $rules = [
@@ -85,7 +86,7 @@ class ColorSection extends Component
                 ->FilterSearch('color_code', $this->search)
                 ->latest()
                 ->paginate(10),
-            'headers' => Color::first()->getHeaders(),
+            'headers' => $this->getHeaders('colors'),
         ])->layout('admin.app');
     }
 }

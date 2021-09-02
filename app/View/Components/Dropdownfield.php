@@ -3,10 +3,12 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Http\Traits\TableHeadersTrait;
 use Illuminate\Support\Facades\Request;
 
 class Dropdownfield extends Component
 {
+    use TableHeadersTrait;
     /**
      * Create a new component instance.
      *
@@ -18,12 +20,13 @@ class Dropdownfield extends Component
     public $model;
     public $name;
     public $value;
-    public function __construct($label, $options, $model)
+    public function __construct($label, $options, $model, $table = null)
     {
         $this->label = $label;
         $this->options = $options;
         $this->model = $model;
-        $this->name = $options->first()->getHeaders()[1];
+        // dd($table);
+        $this->name = $this->getHeaders($table)[1];
 
         // dd($this->headers[1]);
     }

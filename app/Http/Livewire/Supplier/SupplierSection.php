@@ -8,11 +8,12 @@ use Livewire\WithPagination;
 use App\Http\Traits\ToastTrait;
 use App\Http\Traits\CloseModelTrait;
 use Illuminate\Support\ViewErrorBag;
+use App\Http\Traits\TableHeadersTrait;
 use Illuminate\Support\Facades\Session;
 
 class SupplierSection extends Component
 {
-    use ToastTrait, CloseModelTrait, WithPagination;
+    use ToastTrait, CloseModelTrait, WithPagination, TableHeadersTrait;
 
     public $search;
     public $name;
@@ -113,7 +114,7 @@ class SupplierSection extends Component
                 ->latest()
                 ->paginate(10),
 
-            'headers' => Supplier::first()->getHeaders(),
+            'headers' => $this->getHeaders('suppliers'),
         ])->layout('admin.app');
     }
 }
