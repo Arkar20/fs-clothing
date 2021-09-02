@@ -8,10 +8,15 @@ use Livewire\Component;
 use App\Models\ItemDetail;
 use App\Http\Traits\ToastTrait;
 use App\Http\Traits\CloseModelTrait;
+use App\Http\Traits\TableHeadersTrait;
 
 class ItemEditTable extends Component
 {
-    use ToastTrait, CloseModelTrait;
+    use ToastTrait, CloseModelTrait, TableHeadersTrait;
+
+    protected $listeners = ['confirmeddetail', 'cancelled'];
+
+    protected $rules = ['size' => 'required', 'color' => 'required'];
 
     public $item;
 
@@ -19,8 +24,10 @@ class ItemEditTable extends Component
     public $size;
     public $quantity;
 
-    private $sizeid;
-    private $colorid;
+    public $sizeid;
+    public $colorid;
+    public $itemToDelete;
+    public $itemToUpdate;
 
     public function mount($item)
     {
@@ -29,7 +36,8 @@ class ItemEditTable extends Component
     }
     public function clearForm()
     {
-        return;
+        $this->size = '';
+        $this->color = '';
     }
     public function store()
     {
@@ -49,13 +57,60 @@ class ItemEditTable extends Component
 
         $this->errorAlert('Record Exists');
     }
+    public function editItemDetail(ItemDetail $itemdetail)
+    {
+        // dd($itemdetail);
+        $this->resetErrorBag();
+        $this->itemToUpdate = $itemdetail;
+        $this->size = $itemdetail->size->size;
+        $this->color = $itemdetail->color->color;
+        $this->quantity = $itemdetail->quantity;
+    }
+    public function update()
+    {
+        // $this->checkExists();
+        $this->sizeid = Size::where('size', $this->size)->first()->id;
+        $this->colorid = Color::where('color', $this->color)->first()->id;
+
+        $this->itemToUpdate->updateOrCreate(
+            [
+                'item_id' => $this->item->id,
+                'color_id' => $this->colorid,
+                'size_id' => $this->sizeid,
+            ],
+            [
+                'quantity' => $this->quantity,
+            ]
+        );
+        $this->item->total_qty = $this->item->itemdetails()->sum('quantity');
+
+        $this->emit('itemedited');
+
+        $this->closeModal();
+
+        $this->successAlert('ItemDetail Updated Successful!');
+    }
     public function checkExists()
     {
         $this->sizeid = Size::where('size', $this->size)->first()->id;
         $this->colorid = Color::where('color', $this->color)->first()->id;
         return ItemDetail::where('size_id', $this->sizeid)
             ->where('color_id', $this->colorid)
+            ->where('item_id', $this->item->id)
             ->exists();
+    }
+    public function deleteItemDetail(ItemDetail $itemdetail)
+    {
+        $this->confirmDialogForItemdetail();
+        $this->itemToDelete = $itemdetail;
+        // dd($this->itemToDelete);
+    }
+
+    public function confirmeddetail()
+    {
+        $this->itemToDelete->delete();
+        $this->emit('itemedited');
+        $this->successAlert('Item Detail Deleted');
     }
 
     public function render()
@@ -63,6 +118,7 @@ class ItemEditTable extends Component
         return view('livewire.item.item-edit-table', [
             'colors' => Color::all(),
             'sizes' => Size::all(),
+            'headers' => $this->getHeaders('item_details'),
         ]);
     }
 }

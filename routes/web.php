@@ -2,6 +2,7 @@
 
 use App\Models\Item;
 use App\Models\Category;
+use App\Models\ItemDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
@@ -20,6 +21,7 @@ use App\Http\Livewire\Supplier\SupplierSection;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::model('itemdetail', ItemDetail::class);
 
 Route::get('/', function () {
     return view('admin.app');
@@ -44,5 +46,7 @@ Route::get('/items/{item:name}', function (Item $item) {
         'item' => $item->load('itemdetails'),
     ]);
 })->name('items.edit');
+
+//fake id for item details
 
 require __DIR__ . '/auth.php';

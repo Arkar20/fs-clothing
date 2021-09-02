@@ -23,7 +23,6 @@
  <x-entry-form label="Brand" >
    
       <x-text-field label="Brand Name" model='name'  x-ref="fieldToFocus"  />
-      <x-text-field label="Brand Name" model='name'  x-ref="fieldToFocus"  />
              
       <x-text-field label="Company" model='company'  />
 

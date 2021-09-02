@@ -13,7 +13,7 @@ class BrandSection extends Component
 {
     use WithPagination, ToastTrait, CloseModelTrait, TableHeadersTrait;
 
-    protected $listeners = ['confirmed', 'cancelled'];
+    protected $listeners = ['confirmed', 'cancelled', 'clearForm'];
     protected $rules = [
         'name' => 'required|min:4',
         'company' => 'required|min:4',

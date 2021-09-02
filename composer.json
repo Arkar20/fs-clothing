@@ -12,7 +12,8 @@
         "jantinnerezo/livewire-alert": "^2.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "propaganistas/laravel-fakeid": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

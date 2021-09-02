@@ -28,7 +28,8 @@ class ItemDetailFactory extends Factory
         return [
             'item_id' => Item::factory()->create()->id,
             'color_id' => Color::factory()->create()->id,
-            'size_id' => Size::factory()->create()->id,
+            'size_id' =>
+                Size::count() > 0 ? rand(1, 4) : Size::factory()->create()->id,
             'quantity' => rand(10, 20),
         ];
     }

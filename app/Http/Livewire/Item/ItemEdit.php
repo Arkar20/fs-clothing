@@ -13,12 +13,18 @@ class ItemEdit extends Component
 {
     use CloseModelTrait, ToastTrait;
 
+    protected $listeners = ['itemedited' => 'refreshItem'];
     public $item;
     public $brand;
     public $category;
     public $desc;
     public $price;
     public $retail_price;
+
+    public function refreshItem()
+    {
+        $this->item->fresh();
+    }
 
     public function store()
     {

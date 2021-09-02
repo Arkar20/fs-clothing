@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Size;
 use App\Models\Color;
 use Illuminate\Database\Eloquent\Model;
+use Propaganistas\LaravelFakeId\RoutesWithFakeIds;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ItemDetail extends Model
@@ -17,14 +18,21 @@ class ItemDetail extends Model
     {
         parent::boot();
 
-        static::saved(function ($detail) {
+        static::created(function ($detail) {
             $qty = $detail->item->total_qty;
             $detail->item()->update(['total_qty' => $qty + $detail->quantity]);
         });
 
         static::updated(function ($detail) {
-            $qty = $detail->item->total_qty;
-            $detail->item()->update(['total_qty' => $qty + $detail->quantity]);
+            $detail->item()->update([
+                'total_qty' => $detail->item->itemdetails()->sum('quantity'),
+            ]);
+        });
+
+        static::deleted(function ($detail) {
+            $detail->item()->update([
+                'total_qty' => $detail->item->itemdetails()->sum('quantity'),
+            ]);
         });
     }
     public function item()

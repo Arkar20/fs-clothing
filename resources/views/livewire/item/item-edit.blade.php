@@ -116,7 +116,11 @@
 
       </div>
      
-            <livewire:item.item-edit-table :item="$item"/>
+            <livewire:item.item-edit-table 
+            
+                        :item="$item"
+                        
+                        />
         <div class="price-container flex-col space-y-4">
                  <div class="brand w-48 flex justify-between">
                         <h2 class="font-semibold text-lg">Price</h2>

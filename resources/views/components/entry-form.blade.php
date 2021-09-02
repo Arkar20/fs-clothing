@@ -1,6 +1,6 @@
 <div
     x-cloak
-        class="my-4 bg-black"
+         class="my-4 bg-black"
            
 >
     <!-- Trigger for Modal -->
@@ -17,7 +17,11 @@
         <!-- Modal inner -->
         <div
             class="max-w-3xl lg:px-24 lg:py-10 px-12 py-6 mx-auto text-left transform bg-white rounded-lg shadow-lg"
-            @click.away="showModal = false;showUpdate=false"
+            @click.away="showModal = false;
+                        showUpdate=false
+                        Livewire.emit('clearForm')
+                        
+                        "
              x-show="showModal"
             x-transition.duration.600ms
             x-transition.duration:enter="ease-out duration-300"

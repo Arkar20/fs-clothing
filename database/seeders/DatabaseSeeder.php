@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Item;
+use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Category;
@@ -43,6 +44,11 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Item::factory(10)->create();
+
+        $sizes = ['small', 'medium', 'large', 'extra large'];
+        foreach ($sizes as $size) {
+            Size::factory()->create(['size' => $size]);
+        }
 
         ItemDetail::factory(10)->create([
             'item_id' => Item::latest()->first()->id,
