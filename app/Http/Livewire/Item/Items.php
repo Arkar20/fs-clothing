@@ -35,8 +35,8 @@ class Items extends Component
 
     public function render()
     {
-        $categories = Category::all()->pluck('id', 'category');
         $brands = Brand::all()->pluck('id', 'name');
+        $categories = Category::all()->pluck('id', 'category');
 
         return view('livewire.item.items', [
             'items' => Item::when($this->brand, function ($item) use ($brands) {

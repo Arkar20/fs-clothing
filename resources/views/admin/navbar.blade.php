@@ -14,7 +14,7 @@
     x-transition.duration:leave="ease-out duration-200"
     x-transition.duration:leave-start="opacity-100 translate-x-0 sm:scale-100"
     x-transition.duration:leave-end="opacity-0 -translate-x-full sm:scale-100"
-    class="absolute  w-64 h-screen transform   z-20 overflow-auto transition-all duration-300  bg-white text-base-content  border border-1 ">
+    class="absolute  w-64 h-full transform   z-20 overflow-auto transition-all duration-300  bg-white text-base-content  border border-1 ">
       
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         <div class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">

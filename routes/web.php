@@ -1,11 +1,12 @@
 <?php
 
 use App\Models\Item;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
-use App\Http\Livewire\Deliver\DeliverySection;
 use App\Http\Livewire\Item\Registerproduct;
+use App\Http\Livewire\Deliver\DeliverySection;
 use App\Http\Livewire\Category\CategorySection;
 use App\Http\Livewire\Supplier\SupplierSection;
 
@@ -39,7 +40,9 @@ Route::get('/items', function () {
 //     return view('dashboard');
 // })->name('products.single');
 Route::get('/items/{item:name}', function (Item $item) {
-    return view('admin.items.edit', ['item' => $item]);
+    return view('admin.items.edit', [
+        'item' => $item,
+    ]);
 })->name('items.edit');
 
 require __DIR__ . '/auth.php';
