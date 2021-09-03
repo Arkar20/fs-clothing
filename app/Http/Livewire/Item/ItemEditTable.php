@@ -59,7 +59,6 @@ class ItemEditTable extends Component
     }
     public function editItemDetail(ItemDetail $itemdetail)
     {
-        // dd($itemdetail);
         $this->resetErrorBag();
         $this->itemToUpdate = $itemdetail;
         $this->size = $itemdetail->size->size;
@@ -68,7 +67,6 @@ class ItemEditTable extends Component
     }
     public function update()
     {
-        // $this->checkExists();
         $this->sizeid = Size::where('size', $this->size)->first()->id;
         $this->colorid = Color::where('color', $this->color)->first()->id;
 
@@ -103,7 +101,6 @@ class ItemEditTable extends Component
     {
         $this->confirmDialogForItemdetail();
         $this->itemToDelete = $itemdetail;
-        // dd($this->itemToDelete);
     }
 
     public function confirmeddetail()

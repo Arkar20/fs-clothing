@@ -53,15 +53,26 @@
                         {{-- end of available size  --}}
 
                     <div class="font-bold italic">
-                        200pcs available
+                        {{$item->total_qty}}  pcs available
                     </div>    
 
                     <div class="font-bold text-purple-500">
                         ${{$item->price??''}}
                     </div>    
+                    <div class="space-y-3">
 
-                    <div class="flex justify-center">
-                        <a href="{{route('items.edit', $item->name)}}" class="w-48 py-3 text-center  rounded-md bg-purple-500 shadow-md text-white">Inventory</a>
+                        <div class="flex justify-center">
+                            <a href="{{route('items.edit', $item->name)}}" class="w-48 py-3 text-center  rounded-md bg-purple-500 shadow-md text-white">Inventory</a>
+                        </div>
+    
+                        <div class="flex justify-center">
+                            <button 
+                                 x-data
+                                @click="
+                                        $dispatch('edit')
+                                        "
+                                class="w-48 py-3 text-center  rounded-md bg-yellow-500 shadow-md text-white">Add To Cart</button>
+                        </div>
                     </div>
                     </div>
                 </div>
