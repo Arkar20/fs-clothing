@@ -31,12 +31,16 @@
 
 
           <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+            <svg 
+            wire:click="decreaseCart('{{$key}}')"
+            class="fill-current text-gray-600 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
 
-            <input class="mx-auto border text-center w-14" type="text" value="{{$cart->qty}}">
+            <input class="mx-auto border text-center w-14 " disabled type="text" value="{{$cart->qty}}">
 
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+            <svg
+                wire:click="increaseCart('{{$key}}')"
+                class="fill-current text-gray-600 w-3 cursor-pointer" viewBox="0 0 448 512">
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>

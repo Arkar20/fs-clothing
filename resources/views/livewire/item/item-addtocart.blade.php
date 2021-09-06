@@ -30,7 +30,7 @@
             </div>
 
           <h2 class="px-6 text-gray-700 text-lg font-bold">Available Color</h2>
-          <div class="px-6 pt-4 pb-2 flex flex-wrap ">
+          <div class="px-6 pt-4 pb-2 ">
            {{-- @php
                dd($colors);
            @endphp  --}}
@@ -63,12 +63,16 @@
                                     @endforelse
                             @endif
                 </select>
-                                             <span class="font-bold text-lg ">{{$availableqty}}</span>
+                 <p class="font-bold text-lg py-2 block ">{{$availableqty}} pcs available</p> 
+                    <div class="flex  items-center space-x-3">
 
-               
+                    <label for="">Quantity</label>
+                        <input class="border text-center w-14 " type="text" wire:model="qty"/>
+   
+                       </div>
 
-            </div>
-            <div class="flex justify-center my-3">
+                </div>
+                         <div class="flex justify-center my-3">
                               <button 
                                    x-data
                                    wire:click="add()"
@@ -76,7 +80,9 @@
                                           $dispatch('addtocart')
                                           "
                                   class="w-48 py-3 text-center  rounded-md bg-yellow-500 shadow-md text-white">Add To Cart</button>
-                          </div>
+                           </div>
+                
+
         </div>
             </div>
         @endif

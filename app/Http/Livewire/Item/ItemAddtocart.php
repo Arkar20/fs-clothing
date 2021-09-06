@@ -21,6 +21,8 @@ class ItemAddtocart extends Component
 
     public $colors;
     public $selectitem;
+
+    public $qty;
     public function updatedSize()
     {
         $this->addtocartitemid = null;
@@ -67,7 +69,7 @@ class ItemAddtocart extends Component
         Cart::add([
             'id' => $this->itemdetail->id,
             'name' => $this->itemdetail->getItemName(),
-            'qty' => 10,
+            'qty' => $this->qty,
             'price' => $this->item->price,
             'weight' => 0,
             'options' => [
