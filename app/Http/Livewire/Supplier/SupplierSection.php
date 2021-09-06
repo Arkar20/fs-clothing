@@ -30,8 +30,8 @@ class SupplierSection extends Component
     protected $rules = [
         'name' => 'required|min:3|max:100',
         'email' => 'required|email',
-        'hotline1' => 'required|number',
-        'hotline2' => 'required|number',
+        'hotline1' => 'required|numeric',
+        'hotline2' => 'required|numeric',
         'company_name' => 'required|min:3|max:255',
         'address' => 'required|min:3|max:255',
     ];

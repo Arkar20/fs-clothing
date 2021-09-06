@@ -7,10 +7,11 @@ use App\Models\Brand;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
+use App\Http\Traits\TableHeadersTrait;
 
 class Registerproduct extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, TableHeadersTrait;
 
     public $name;
     public $price;
@@ -74,7 +75,7 @@ class Registerproduct extends Component
     {
         return view('livewire.item.registerproduct', [
             'items' => Item::latest()->paginate(10),
-            'headers' => Item::first()->getHeaders(),
+            'headers' => $this->getHeaders('headers'),
             'brands' => Brand::all(),
             'categories' => Category::all(),
         ])->layout('admin.app');

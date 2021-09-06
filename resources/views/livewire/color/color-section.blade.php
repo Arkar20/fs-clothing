@@ -29,7 +29,8 @@
       <x-text-field label="Color Code" model='color_code'  />
      
      <div  x-show="!showUpdate" class="inline">
-       <x-loading-confirm wire:target="store"/>
+       <x-loading-confirm   wire:click.prevent='store'
+             wire:target="store" />
      </div>
      <Button class="btn btn-accent" x-show="showUpdate" wire:click="update" >Update</Button>
   </x-entry-form>

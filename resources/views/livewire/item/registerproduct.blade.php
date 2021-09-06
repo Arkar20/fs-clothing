@@ -22,9 +22,9 @@
 
         <x-text-area placeholder="Description"  model='desc'  />
 
-        <x-dropdownfield label="All Brands" :options="$brands" model="brand"/>
+        <x-dropdownfield label="All Brands" :options="$brands" model="brand" table="brands"/>
         
-        <x-dropdownfield label="All Categories" :options="$categories" model="category"/>
+        <x-dropdownfield label="All Categories" :options="$categories" model="category" table="categories"/>
 
         <div class="w-full flex justify-end">
                  <x-loading-confirm wire:target="store"/>

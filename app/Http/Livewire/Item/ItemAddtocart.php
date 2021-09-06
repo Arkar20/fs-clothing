@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire\Item;
 
+use ErrorException;
 use App\Models\Item;
 use App\Models\Color;
 use Livewire\Component;
 use App\Models\ItemDetail;
+use App\Http\Traits\ToastTrait;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ItemAddtocart extends Component
 {
-    protected $listeners = ['itemtoaddtocart'];
+    use ToastTrait;
+
+    protected $listeners = ['itemtoaddtocart', 'confirmed', 'cancelled'];
+    protected $rules = ['qty' => 'required'];
+
     public $item;
     public $size;
     public $color;
@@ -23,6 +29,7 @@ class ItemAddtocart extends Component
     public $selectitem;
 
     public $qty;
+
     public function updatedSize()
     {
         $this->addtocartitemid = null;
@@ -59,13 +66,33 @@ class ItemAddtocart extends Component
     }
     public function add()
     {
-        Cart::setGlobalTax(0);
-        $this->itemdetail = ItemDetail::where('item_id', $this->item->id)
+        $this->validate();
+        try {
+            Cart::setGlobalTax(0);
+            $this->itemdetail = $this->getDetailItem();
+            // dd($this->itemdetail);
+            $this->addintocart();
+            $this->emit('itemaddedtocart');
+        } catch (ErrorException $e) {
+            $this->confirmDialog(
+                "Sorry You Don't Have Size and Color for This Item, GO TO INVENTORY?"
+            );
+        }
+    }
+    public function confirmed()
+    {
+        return redirect()->route('items.edit', $this->item->name);
+    }
+    public function getDetailItem()
+    {
+        return ItemDetail::where('item_id', $this->item->id)
             ->where('size_id', $this->size)
             ->where('color_id', $this->color)
             ->get()
             ->first();
-        // dd($this->itemdetail);
+    }
+    public function addintocart()
+    {
         Cart::add([
             'id' => $this->itemdetail->id,
             'name' => $this->itemdetail->getItemName(),
@@ -77,8 +104,6 @@ class ItemAddtocart extends Component
                 'color' => $this->itemdetail->getItemColor(),
             ],
         ]);
-        $this->emit('itemaddedtocart');
-        // dd(Cart::content());
     }
 
     public function render()

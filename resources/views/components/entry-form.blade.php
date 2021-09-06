@@ -49,7 +49,11 @@
             </div>
 
             <!-- content -->
-            <form wire:submit.prevent="store">
+            <form
+            
+             
+                
+                >
                 
                 {{$slot}}
                 

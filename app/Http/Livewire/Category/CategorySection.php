@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Category;
 
-use App\Http\Traits\CloseModelTrait;
-use App\Http\Traits\ToastTrait;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
+use App\Http\Traits\ToastTrait;
+use App\Http\Traits\CloseModelTrait;
+use App\Http\Traits\TableHeadersTrait;
 
 class CategorySection extends Component
 {
-    use ToastTrait, WithPagination, CloseModelTrait;
+    use ToastTrait, WithPagination, CloseModelTrait, TableHeadersTrait;
     protected $listeners = ['confirmed', 'cancelled'];
     protected $rules = ['category' => 'required|min:3'];
 
@@ -70,7 +71,7 @@ class CategorySection extends Component
             'categories' => Category::FilterSearch('category', $this->search)
                 ->latest()
                 ->paginate(10),
-            'headers' => Category::first()->getHeaders(),
+            'headers' => $this->getHeaders('categories'),
         ])->layout('admin.app');
     }
 }

@@ -4,6 +4,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\ItemDetail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Item\SizeSection;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
 use App\Http\Livewire\Item\Registerproduct;
@@ -32,7 +33,7 @@ Route::get('/category', CategorySection::class);
 Route::get('/color', ColorSection::class);
 Route::get('/supplier', SupplierSection::class);
 Route::get('/delivery', DeliverySection::class);
-Route::get('/delivery', DeliverySection::class);
+Route::get('/size', SizeSection::class);
 Route::get('/items/register', Registerproduct::class)->name('item.register');
 
 Route::get('/items', function () {

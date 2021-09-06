@@ -16,6 +16,10 @@ class CreateSizesTable extends Migration
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
             $table->string('size');
+            $table->string('waist')->nullable();
+            $table->string('hip')->nullable();
+            $table->string('inside_leg')->nullable();
+            $table->string('weight')->nullable();
             $table->timestamps();
         });
     }

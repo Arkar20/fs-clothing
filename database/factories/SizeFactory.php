@@ -25,6 +25,10 @@ class SizeFactory extends Factory
 
         return [
             'size' => $this->faker->word(),
+            'waist' => $this->faker->numberBetween(10, 20),
+            'hip' => $this->faker->numberBetween(10, 20),
+            'inside_leg' => $this->faker->numberBetween(10, 20),
+            'weight' => $this->faker->numberBetween(10, 20),
         ];
     }
 }

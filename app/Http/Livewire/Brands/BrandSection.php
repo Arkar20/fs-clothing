@@ -32,7 +32,7 @@ class BrandSection extends Component
 
     public function store()
     {
-        sleep(4);
+        // sleep(4);
         $this->validate();
 
         $brand = Brand::create([

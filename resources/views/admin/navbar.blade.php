@@ -29,6 +29,13 @@
              <span class="text-left">Brand</span>
         </a>
     </li>
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        
+        <a  href="/size" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Size</span>
+        </a>
+    </li>
 
     {{-- product showroom  --}}
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
