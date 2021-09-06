@@ -15,6 +15,10 @@ class ItemSingle extends Component
     {
         $this->item = $item;
     }
+    public function selectProductCart(Item $item)
+    {
+        $this->emit('itemtoaddtocart', $item);
+    }
 
     public function render()
     {

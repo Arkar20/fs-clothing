@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
@@ -67,17 +68,7 @@ class="position-relative">
         </div>
         <div class="flex-none">
             <div class="flex items-center space-x-4">
-                <div class="cart-icon relative">
-                    <svg 
-                        x-data
-                        @click="$dispatch('opencart')"
-                    class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                  <div class="absolute top-0 right-4 text-xs w-4 h-4 text-center rounded-full  bg-red-400 text-white">
-                        0
-                  </div>
-                </div>
+               <livewire:item.cart-icon />
                 <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairTheCaesarSidePart&accessoriesType=Sunglasses&hairColor=BrownDark&facialHairType=BeardMajestic&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Gray01&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Twinkle&skinColor=Light" 
                 class="md:w-12 md:h-12 w-10 h-10 rounded-full"/>
             </div>

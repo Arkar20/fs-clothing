@@ -35,6 +35,14 @@ class Item extends Model
             ->latest()
             ->get();
     }
+    public function getUniqueSize()
+    {
+        return $this->itemdetails()
+            ->pluck('id', 'size_id')
+            ->map(function ($value) {
+                return ItemDetail::find($value);
+            });
+    }
 
     public function scopeFilterWithMetadata($query, $metadata, $field)
     {

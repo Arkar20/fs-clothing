@@ -68,8 +68,9 @@
                         <div class="flex justify-center">
                             <button 
                                  x-data
+                                 wire:click="selectProductCart({{$item->id}})"
                                 @click="
-                                        $dispatch('edit')
+                                        $dispatch('addtocart')
                                         "
                                 class="w-48 py-3 text-center  rounded-md bg-yellow-500 shadow-md text-white">Add To Cart</button>
                         </div>

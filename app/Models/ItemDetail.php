@@ -35,6 +35,18 @@ class ItemDetail extends Model
             ]);
         });
     }
+    public function getItemName()
+    {
+        return $this->item->name;
+    }
+    public function getItemSize()
+    {
+        return $this->size->size;
+    }
+    public function getItemColor()
+    {
+        return $this->color->color;
+    }
     public function item()
     {
         return $this->belongsTo(Item::class);

@@ -32,6 +32,10 @@ class Items extends Component
     {
         $this->emit('singleItemHasSelected', $item);
     }
+    public function selecteditemtocart(Item $item)
+    {
+        $this->emit('itemtoaddtocart', $item);
+    }
 
     public function render()
     {
