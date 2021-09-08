@@ -38,15 +38,19 @@ Route::get('/items/register', Registerproduct::class)->name('item.register');
 
 Route::get('/items', function () {
     return view('admin.items.index');
-});
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('products.single');
+})->name('item.showroom');
+
 Route::get('/items/{item:name}', function (Item $item) {
     return view('admin.items.edit', [
         'item' => $item->load('itemdetails'),
     ]);
 })->name('items.edit');
+
+Route::get('/purchase', function () {
+    // return 'hello';
+
+    return view('admin.items.purchase');
+})->name('items.purchase');
 
 //fake id for item details
 

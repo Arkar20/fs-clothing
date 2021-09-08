@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
 use App\Http\Traits\ToastTrait;
+use Illuminate\Validation\Rule;
 use App\Http\Traits\CloseModelTrait;
 use App\Http\Traits\TableHeadersTrait;
 
@@ -13,7 +14,6 @@ class CategorySection extends Component
 {
     use ToastTrait, WithPagination, CloseModelTrait, TableHeadersTrait;
     protected $listeners = ['confirmed', 'cancelled'];
-    protected $rules = ['category' => 'required|min:3'];
 
     public $category;
     public $search;
@@ -22,6 +22,10 @@ class CategorySection extends Component
     public $categoryToUpdate;
 
     public $categoryToDelete;
+
+    protected $rules = [
+        'category' => 'required|min:4|unique:categories',
+    ];
 
     public function store()
     {

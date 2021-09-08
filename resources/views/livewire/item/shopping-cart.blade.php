@@ -1,8 +1,10 @@
 {{-- shopping cart  --}}
-       <div
+    <div
        x-show="shoppingcart"
+     
+     
        class="container mx-auto mt-10">
-    <div class="flex shadow-md mt-10 mb-4">
+     <div class="flex shadow-md mt-10 mb-4">
       <div class="w-full bg-white px-10 ">
         <div class="flex justify-between ">
           <h1 class="font-semibold text-2xl">Shopping Cart</h1>
@@ -17,9 +19,7 @@
         @forelse($cartitems as $key=>$cart)
         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> <!-- product -->
-            {{-- <div class="w-20">
-              <img class="h-24" src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z" alt="">
-            </div> --}}
+           
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="font-bold text-sm">{{$cart->name}}</span>
                  <span class="text-purple-500 text-xs">{{$cart->options['size']}}|{{$cart->options['color']}}</span>

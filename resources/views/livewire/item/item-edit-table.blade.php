@@ -27,7 +27,7 @@
                      <Button class="btn btn-accent" x-show="showUpdate" wire:click.prevent="update" >Update</Button>
                         
                         <div  x-show="!showUpdate" class="inline">
-                        <x-loading-confirm wire:target="store"/>
+                        <x-loading-confirm wire:target="store" wire:click.prevent="store"/>
                         
                         </div>
 

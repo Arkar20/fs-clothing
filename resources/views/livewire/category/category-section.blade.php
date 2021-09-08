@@ -28,9 +28,9 @@
       <x-text-field label="Category Name" model='category'  x-ref="fieldToFocus"/>
      
      <div  x-show="!showUpdate" class="inline">
-       <x-loading-confirm wire:target="store"/>
+       <x-loading-confirm wire:target="store" wire:click="store"/>
      </div>
-     <Button class="btn btn-accent" x-show="showUpdate" wire:click="update" >Update</Button>
+     <Button class="btn btn-accent" x-show="showUpdate" wire:click.prevent="update" >Update</Button>
   </x-entry-form>
 
 <x-table-layout :data="$categories" :headers="$headers"/>

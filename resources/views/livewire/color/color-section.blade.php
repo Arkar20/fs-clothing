@@ -32,7 +32,7 @@
        <x-loading-confirm   wire:click.prevent='store'
              wire:target="store" />
      </div>
-     <Button class="btn btn-accent" x-show="showUpdate" wire:click="update" >Update</Button>
+     <Button class="btn btn-accent" x-show="showUpdate" wire:click.prevent="update" >Update</Button>
   </x-entry-form>
 {{-- end of modal form --}}
 

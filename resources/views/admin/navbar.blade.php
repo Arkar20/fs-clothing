@@ -76,6 +76,12 @@
              <span class="text-left">Supplier</span>
         </a>
     </li>
+    <li class="mx-10 my-3 flex justify-center cursor-pointer">
+        <a href="/purchase" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+           
+             <span class="text-left">Purchase</span>
+        </a>
+    </li>
 
       
     </ul>

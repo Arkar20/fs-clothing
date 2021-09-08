@@ -28,8 +28,16 @@ class CreateItemsTable extends Migration
                 ->text('img3')
                 ->default(null)
                 ->nullable();
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('brand_id')->constrained();
+            $table
+                ->foreignId('category_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('Set Null');
+            $table
+                ->foreignId('brand_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('Set Null');
             $table->foreignId('user_id')->constrained();
             $table->string('desc');
             $table->integer('price');

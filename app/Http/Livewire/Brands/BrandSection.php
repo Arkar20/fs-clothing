@@ -6,6 +6,7 @@ use App\Models\Brand;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Traits\ToastTrait;
+use Illuminate\Validation\Rule;
 use App\Http\Traits\CloseModelTrait;
 use App\Http\Traits\TableHeadersTrait;
 
@@ -15,10 +16,17 @@ class BrandSection extends Component
 
     protected $listeners = ['confirmed', 'cancelled', 'clearForm'];
     protected $rules = [
-        'name' => 'required|min:4',
+        'name' => 'required|min:4|unique:brands',
         'company' => 'required|min:4',
         'desc' => 'required|min:4',
     ];
+    // public $customrules = [
+    //     'name' => [
+    //         'required',
+    //         'min:4',
+    //         Rule::unique('brands')->ignore($this->name),
+    //     ],
+    // ];
 
     public $name;
     public $company;
@@ -56,8 +64,13 @@ class BrandSection extends Component
     }
     public function update()
     {
-        $this->validate();
-
+        // $this->validateOnly($this->customrules);
+        $this->validate([
+            'name' => [
+                'required',
+                Rule::unique('brands')->ignore($this->brandToUpdate->id),
+            ],
+        ]);
         $this->brandToUpdate->update([
             'name' => $this->name,
             'desc' => $this->desc,

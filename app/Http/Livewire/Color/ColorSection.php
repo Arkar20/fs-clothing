@@ -15,8 +15,8 @@ class ColorSection extends Component
 
     protected $listeners = ['confirmed', 'cancelled'];
     protected $rules = [
-        'color' => 'required|min:2',
-        'color_code' => 'required|min:7',
+        'color' => 'required|min:3|unique:colors',
+        'color_code' => 'required|min:6',
     ];
 
     public $search;
@@ -49,7 +49,10 @@ class ColorSection extends Component
     }
     public function update()
     {
-        $this->validate();
+        $this->validate([
+            'color' => 'required|min:3',
+            'color_code' => 'required|min:6',
+        ]);
 
         $this->colorToUpdate->update([
             'color' => $this->color,
