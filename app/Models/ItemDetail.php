@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ItemDetail extends Model
 {
     use HasFactory;
-    protected $with = ['size', 'color'];
+    protected $with = ['size', 'color','item'];
 
     public static function boot()
     {

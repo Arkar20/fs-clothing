@@ -2,6 +2,7 @@
 
 use App\Models\Item;
 use App\Models\Category;
+use App\Models\Purchase;
 use App\Models\ItemDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Item\SizeSection;
@@ -25,8 +26,8 @@ use App\Http\Livewire\Supplier\SupplierSection;
 // Route::model('itemdetail', ItemDetail::class);
 
 Route::get('/', function () {
-    return view('admin.app');
-});
+    return view('admin.dashboard');
+})->name('admin.dashboard');
 
 Route::get('/brand', BrandSection::class);
 Route::get('/category', CategorySection::class);
@@ -47,11 +48,19 @@ Route::get('/items/{item:name}', function (Item $item) {
 })->name('items.edit');
 
 Route::get('/purchase', function () {
-    // return 'hello';
-
+    // return 'hello'
     return view('admin.items.purchase');
 })->name('items.purchase');
 
+
+Route::get('/purchase/manage', function() {
+    return view('admin.items.purchase-table');
+})->name('purchase.table');
 //fake id for item details
+
+
+Route::get('/purchase/{purchase}', function(Purchase $purchase) {
+    return view('admin.items.purchase-detail',['purchase'=>$purchase->load('purchase_items')]);
+})->name('purchase.detail');
 
 require __DIR__ . '/auth.php';

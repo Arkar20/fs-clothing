@@ -1,4 +1,5 @@
 <div>
+   
 @if($item)
  <div class="hidden md:block transition duration-400 w-1/4 bg-white mt-2 rounded-lg shadow-sm  border border-1 border-gray-200 fixed right-0">
                 {{-- start of preview section     --}}

@@ -3,7 +3,7 @@
 <div 
     x-cloak
     x-show="drawer" 
-    class="z-10 absolute top-18 right-0 bg-black opacity-40 w-screen h-screen"></div>
+    class="z-10 fixed top-18 right-0 bg-black opacity-40 w-screen max-h-100 "></div>
 
     <ul 
     @click.away="drawer=false"
@@ -16,11 +16,13 @@
     x-transition.duration:leave-end="opacity-0 -translate-x-full sm:scale-100"
     class="absolute  w-64 h-full transform   z-20 overflow-auto transition-all duration-300  bg-white text-base-content  border border-1 ">
       
+   
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
-        <div class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        
+       <a  href="{{route('admin.dashboard')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Dashboard</span>
-        </div>
+        </a>
     </li>
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         

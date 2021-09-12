@@ -14,7 +14,8 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "propaganistas/laravel-fakeid": "^4.0"
+        "propaganistas/laravel-fakeid": "^4.0",
+        "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

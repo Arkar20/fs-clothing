@@ -11,8 +11,19 @@
         :class="selected?'md:w-3/4 ':'min-w-full mx-auto  '">
 
                 {{-- banner --}}
-                <div class="w-100 flex justify-between items-center mx-12 ">
-                     <h2 class="title px-4  text-2xl font-bold">Product Showroom</h2>
+                <div class="w-100 flex-col md:flex justify-between items-center mx-12 ">
+                     <div class="text-sm breadcrumbs">
+                        <ul>
+                            <li>
+                                  <a>Dashboard</a>
+                            </li> 
+                            <li>
+                                  <a>Product Showroom</a>
+                            </li> 
+                           
+                           
+                        </ul>
+                    </div>
 
                      <a href="/items/register" class="w-48 flex justify-center items-center space-x-2 btn-md btn-primary rounded-md" @click="
                         ">
@@ -23,8 +34,9 @@
                     </a>
                 </div>
                 {{-- banner --}}
+                  
                 
-       <div class="mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300">
+       <div class="mx-4 md:mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300">
             {{-- start of search panel   --}}
                 <x-search-section>
                     <x-slot name="left">
@@ -61,7 +73,7 @@
             @endif
 
 
-            <div  class="products-section   mt-4 grid grid-cols-2 md:grid-cols-4 px-10 gap-4">
+            <div  class="products-section mt-4 grid grid-cols-2 md:grid-cols-4 md:px-10 gap-4">
                 @forelse ($items as $item)
                 {{-- start of product single --}}
                

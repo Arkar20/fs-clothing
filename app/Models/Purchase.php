@@ -3,16 +3,19 @@
 namespace App\Models;
 
 use App\Models\Supplier;
+use App\Http\Traits\FilterFieldTrait;
 use Illuminate\Database\Eloquent\Model;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Propaganistas\LaravelFakeId\RoutesWithFakeIds;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Purchase extends Model
 {
-    use HasFactory;
+    use HasFactory,FilterFieldTrait,RoutesWithFakeIds;
+
 
     protected $guarded = [];
-
+    protected $with = ['supplier'];
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
@@ -67,4 +70,11 @@ class Purchase extends Model
     {
         return $this->purchase_items()->itemdetails();
     }
+    
+    // public function getAllInformation()
+    // {
+    //     return $this->purchase_items()->with('item')->get();
+    // }
+
+  
 }

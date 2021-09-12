@@ -1,12 +1,24 @@
 <div>
 <div class="actionbar flex justify-between items-center px-6  ">
      
-    <a href="{{url()->previous()}}" class="title text-xl font-bold  space-x-1 ">
+
+    <div class="text-sm breadcrumbs flex justify-between items-center px-10 ">
+        <ul>
+          <li>
+            <a href="{{url()->previous()}}">Showroom</a>
+          </li> 
+          <li>
+            Inventory
+          </li> 
+          <li>{{$item->name}}</li>
+        </ul>
+      </div>
+    {{-- <a href="{{url()->previous()}}" class="title text-xl font-bold  space-x-1 ">
           <svg  class=" w-6  align-bottom inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
         <span>Back With Previous Filters</span>
-      </a>
+      </a> --}}
               {{-- remove btn  --}}
         <button 
             type="button" 

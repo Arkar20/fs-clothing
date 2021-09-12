@@ -1,5 +1,5 @@
 <div>
-
+      
     {{-- start of go back and delte section  --}}
         <livewire:item.item-delete :item="$item"/>
     {{-- end of go back and delte section  --}}
