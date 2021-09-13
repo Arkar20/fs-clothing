@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use App\Models\Item;
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\ItemDetail;
@@ -24,10 +26,9 @@ use App\Http\Livewire\Supplier\SupplierSection;
 |
 */
 // Route::model('itemdetail', ItemDetail::class);
+Route::middleware('auth')->group(function(){
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+Route::get('/', [ItemController::class,'showdashboard'])->name('admin.dashboard');
 
 Route::get('/brand', BrandSection::class);
 Route::get('/category', CategorySection::class);
@@ -62,5 +63,16 @@ Route::get('/purchase/manage', function() {
 Route::get('/purchase/{purchase}', function(Purchase $purchase) {
     return view('admin.items.purchase-detail',['purchase'=>$purchase->load('purchase_items')]);
 })->name('purchase.detail');
+
+
+Route::get('/profile/{user}',function(User $user){
+    $user=$user?:auth()->user();
+    return view('admin.profile',compact('user'));
+})->name('admin.profile');
+
+
+});
+
+
 
 require __DIR__ . '/auth.php';

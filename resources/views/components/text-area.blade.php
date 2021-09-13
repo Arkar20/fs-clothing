@@ -1,3 +1,4 @@
+
 <div>
     <textarea 
     wire:model.defer='{{$model}}'

@@ -74,12 +74,41 @@ class="position-relative">
                 </div>
         </div>
         <div class="flex-none">
+          
             <div
            
             class="flex items-center space-x-4">
                <livewire:item.cart-icon />
+                 <div class="dropdown dropdown-end">
+                    <div tabindex="0" >
                 <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairTheCaesarSidePart&accessoriesType=Sunglasses&hairColor=BrownDark&facialHairType=BeardMajestic&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Gray01&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Twinkle&skinColor=Light" 
-                class="md:w-12 md:h-12 w-10 h-10 rounded-full"/>
+                class="md:w-12 md:h-12 w-10 h-10 rounded-full cursor-pointer"/>
+                    </div> 
+                    <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+                        @auth
+                        <li>
+                         <a href="{{route('admin.profile',auth()->id())}}">Profile</a>
+                        </li> 
+                        <li class="text-red-600 focus:bg-red-600 focus:text-white">
+                             <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                    <button type="submit" >Log out</button>
+                                 
+                             </form>
+                        </li> 
+                        @endauth
+
+                        @if(!auth()->check())
+                        
+                        <li class=" focus:text-white">
+                              <a href="{{route('login')}}">Login</a>
+                        </li> 
+                        
+                        @endif
+                       
+                    </ul>
+                    </div>
+               
             </div>
         </div>
     </div>
