@@ -14,7 +14,7 @@ class ItemAddtocart extends Component
 {
     use ToastTrait;
 
-    protected $listeners = ['itemtoaddtocart', 'confirmed', 'cancelled'];
+    protected $listeners = ['itemtoaddtocart', 'confirmedForAddtoCart', 'cancelled'];
     protected $rules = ['qty' => 'required'];
 
     public $item;
@@ -79,7 +79,7 @@ class ItemAddtocart extends Component
             );
         }
     }
-    public function confirmed()
+    public function confirmedForAddtoCart()
     {
         return redirect()->route('items.edit', $this->item->name);
     }

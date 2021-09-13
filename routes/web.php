@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ItemController;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Category;
@@ -8,6 +7,8 @@ use App\Models\Purchase;
 use App\Models\ItemDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Item\SizeSection;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
 use App\Http\Livewire\Item\Registerproduct;
@@ -69,6 +70,8 @@ Route::get('/profile/{user}',function(User $user){
     $user=$user?:auth()->user();
     return view('admin.profile',compact('user'));
 })->name('admin.profile');
+
+Route::get('/staffs/manage',[UserController::class,'manageStaff'])->name('staffs.manage');
 
 
 });
