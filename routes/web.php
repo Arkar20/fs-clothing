@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
 use App\Http\Livewire\Item\Registerproduct;
+use App\Http\Controllers\CustomerController;
 use App\Http\Livewire\Deliver\DeliverySection;
 use App\Http\Livewire\Category\CategorySection;
 use App\Http\Livewire\Supplier\SupplierSection;
@@ -27,16 +28,26 @@ use App\Http\Livewire\Supplier\SupplierSection;
 |
 */
 // Route::model('itemdetail', ItemDetail::class);
-Route::middleware('auth')->group(function(){
 
-Route::get('/', [ItemController::class,'showdashboard'])->name('admin.dashboard');
+Route::middleware('auth:customer')->get('/',function(){
+    return view('customer.home');
+});
+Route::get('/login',[CustomerController::class,'create'])->name('customer.create');
+Route::post('/login',[CustomerController::class,'store'])->name('customer.store');
+Route::post('/logout',[CustomerController::class,'logout'])->name('customer.logout');
 
-Route::get('/brand', BrandSection::class);
-Route::get('/category', CategorySection::class);
-Route::get('/color', ColorSection::class);
-Route::get('/supplier', SupplierSection::class);
-Route::get('/delivery', DeliverySection::class);
-Route::get('/size', SizeSection::class);
+
+
+Route::prefix('admin')->middleware('auth:web')->group(function(){
+
+Route::get('/dashboard', [ItemController::class,'showdashboard'])->name('admin.dashboard');
+
+Route::get('/brand', BrandSection::class)->name('admin.brand');
+Route::get('/category', CategorySection::class)->name('admin.category');
+Route::get('/color', ColorSection::class)->name('admin.color');
+Route::get('/supplier', SupplierSection::class)->name('admin.supplier');
+Route::get('/delivery', DeliverySection::class)->name('admin.delivery');
+Route::get('/size', SizeSection::class)->name('admin.size');
 Route::get('/items/register', Registerproduct::class)->name('item.register');
 
 Route::get('/items', function () {
@@ -74,8 +85,12 @@ Route::get('/profile/{user}',function(User $user){
 Route::get('/staffs/manage',[UserController::class,'manageStaff'])->name('staffs.manage');
 
 
+
 });
 
 
 
 require __DIR__ . '/auth.php';
+
+
+

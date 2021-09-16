@@ -12,11 +12,12 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
+      
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -39,6 +40,11 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        'customer'=>[
+            'redirectTo'=>'customer.login',
+            'driver'=>'session',
+            'provider'=>'customers'
         ],
 
         'api' => [
@@ -69,6 +75,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+          'customers' => [
+             'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
         ],
 
         // 'users' => [

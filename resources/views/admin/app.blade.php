@@ -113,15 +113,17 @@ class="position-relative">
         </div>
     </div>
     {{-- end of app bar --}}
-
-    {{-- start of navigation --}}
-        @include('admin.navbar')
-    {{-- end of navigation --}}
+@auth
+{{-- start of navigation --}}
+    @include('admin.navbar')
+{{-- end of navigation --}}
+@endauth
 
 <main >
     {{ $slot ?? '' }}
 </main>
-
+@auth
+    
     <!-- This example requires Tailwind CSS v2.0+ -->
 <div
 x-cloak
@@ -178,6 +180,8 @@ class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="d
 
 
 </div>
+@endauth
+
        
    </div>
 

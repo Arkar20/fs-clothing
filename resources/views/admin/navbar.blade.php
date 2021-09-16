@@ -26,14 +26,14 @@
     </li>
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         
-        <a  href="/brand" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a  href="{{route('admin.brand')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Brand</span>
         </a>
     </li>
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         
-        <a  href="/size" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a  href="{{route('admin.size')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Size</span>
         </a>
@@ -42,7 +42,7 @@
     {{-- product showroom  --}}
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         
-        <a  href="/items" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a  href="{{route('item.showroom')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Showroom</span>
         </a>
@@ -52,7 +52,7 @@
     {{-- product register  --}}
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
         
-        <a  href="/items/register" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a  href="{{route('item.register')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Register Product</span>
         </a>
@@ -61,25 +61,25 @@
 
 
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
-        <a href="/category" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a href="{{route('admin.category')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Category</span>
         </a>
     </li>
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
-        <a href="/color" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a href="{{route('admin.color')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Color</span>
         </a>
     </li>
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
-        <a href="/supplier" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a href="{{route('admin.supplier')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Supplier</span>
         </a>
     </li>
     <li class="mx-10 my-3 flex justify-center cursor-pointer">
-        <a href="/purchase" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
+        <a href="{{route('items.purchase')}}" class="w-96 text-center text-gray-600 py-4 px-4 hover:bg-purple-500 hover:text-white rounded-3xl flex justify-center">
            
              <span class="text-left">Purchase</span>
         </a>
