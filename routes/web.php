@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use App\Models\ItemDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Item\SizeSection;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Color\ColorSection;
@@ -32,6 +33,8 @@ use App\Http\Livewire\Supplier\SupplierSection;
 Route::middleware('auth:customer')->get('/',function(){
     return view('customer.home');
 });
+Route::get('/',[HomeController::class,'index']);
+Route::get('/shop',[HomeController::class,'shop'])->name('home.shop');
 Route::get('/login',[CustomerController::class,'create'])->name('customer.create');
 Route::post('/login',[CustomerController::class,'store'])->name('customer.store');
 Route::post('/logout',[CustomerController::class,'logout'])->name('customer.logout');

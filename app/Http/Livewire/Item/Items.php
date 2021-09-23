@@ -30,6 +30,7 @@ class Items extends Component
 
     public function selectToDisplay(Item $item)
     {
+                        
         $this->emit('singleItemHasSelected', $item);
     }
     public function selecteditemtocart(Item $item)

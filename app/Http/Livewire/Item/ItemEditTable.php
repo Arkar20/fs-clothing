@@ -52,9 +52,11 @@ class ItemEditTable extends Component
             $this->closeModal();
             $this->clearForm();
             $this->successAlert('New Color and Size Registered Successful!');
-            return $this->item->fresh();
-        }
+              $this->emit('colorandsizeisadded');
 
+            return $this->item->fresh();
+            
+        }
         $this->errorAlert('Record Exists');
     }
     public function editItemDetail(ItemDetail $itemdetail)

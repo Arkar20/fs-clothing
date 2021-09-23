@@ -13,17 +13,19 @@ class ItemEdit extends Component
 {
     use CloseModelTrait, ToastTrait;
 
-    protected $listeners = ['itemedited' => 'refreshItem'];
+    protected $listeners = ['itemedited' => 'refreshItem','colorandsizeisadded'=>'refreshItem'];
     public $item;
     public $brand;
     public $category;
     public $desc;
     public $price;
     public $retail_price;
-
+    public $total_qty;
+   
     public function refreshItem()
     {
         $this->item->fresh();
+        // $this->total_qty = $this->item->total_qty;
     }
 
     public function store()
@@ -39,6 +41,7 @@ class ItemEdit extends Component
         $this->price = $item->price;
         $this->retail_price = $item->retail_price;
         $this->desc = $item->desc;
+        $this->total_qty=$item->total_qty;
     }
     public function updateBrand()
     {

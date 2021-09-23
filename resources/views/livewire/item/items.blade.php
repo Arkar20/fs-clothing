@@ -7,24 +7,37 @@
 
               
                 "
-        x-transition="transition-width ease-in"
-        :class="selected?'md:w-3/4 ':'min-w-full mx-auto  '">
+        @if(request()->route()->getName()=='home.shop')
 
+                class="md:w-100 min-w-full mx-auto"
+        @else
+                x-transition="transition-width ease-in"
+                :class="selected?'md:w-3/4 ':'min-w-full mx-auto  '
+        @endif
+        "
+        
+        >
                 {{-- banner --}}
-                <div class="w-100 flex-col md:flex justify-between items-center mx-12 ">
+                <div class="w-100 flex-coljustify-between md:items-center mx-12 ">
                      <div class="text-sm breadcrumbs">
                         <ul>
                             <li>
+                             @if(request()->route()->getName()=='home.shop')
+                                
+                                  <a>Shop</a>
+                                @else
                                   <a>Dashboard</a>
+                                @endif
                             </li> 
                             <li>
                                   <a>Product Showroom</a>
                             </li> 
+                            
                            
                            
                         </ul>
                     </div>
-
+                    @auth
                      <a href="/items/register" class="w-48 flex justify-center items-center space-x-2 btn-md btn-primary rounded-md" @click="
                         ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,6 +45,7 @@
                     </svg>
                     <span>Register Product</span>
                     </a>
+                    @endauth
                 </div>
                 {{-- banner --}}
                   
@@ -78,7 +92,9 @@
                 {{-- start of product single --}}
                
                 <div 
-                
+                {{-- @if (request()->route()->getName()=='home.shop')
+                     @click="window.location='/shop/{{$item->name}}'"
+                @endif --}}
                 wire:click='selectToDisplay({{$item}})'
                 class="product-single border border-1 border-gray-200 shadow-lg hover:border-gray-900 cursor-pointer" >
                     <div >

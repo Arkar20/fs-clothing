@@ -1,19 +1,37 @@
-
 input[type="radio"] + label span {
-    transition: background .2s,
-      transform .2s;
+    transition: background 0.2s, transform 0.2s;
 }
 
 input[type="radio"] + label span:hover,
-input[type="radio"] + label:hover span{
-  transform: scale(1.2);
-} 
-
-input[type="radio"]:checked + label span {
-  background-color: #3490DC; //bg-blue
-  box-shadow: 0px 0px 0px 2px white inset;
+input[type="radio"] + label:hover span {
+    transform: scale(1.2);
 }
 
-input[type="radio"]:checked + label{
-   color: #3490DC; //text-blue
+input[type="radio"]:checked + label span {
+    background-color: #3490dc; //bg-blue
+    box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type="radio"]:checked + label {
+    color: #3490dc; //text-blue
+}
+.hero {
+    background-color: transparent;
+    background: center no-repeat;
+    background-image: url("https://lp2.hm.com/hmgoepprod?source=url[https://www2.hm.com/content/dam/ladies_s04/1144a/1144A-TCL4023-SGI-3x2.jpg]&scale=size[960]&sink=format[jpeg],quality[100]");
+}
+/* customer site  */
+.topitemlink {
+    z-index: 10;
+    opacity: 0;
+}
+.topitem {
+    background: black;
+    transition: all 0.3s;
+}
+.topitem:hover .topitemlink {
+    opacity: 1;
+}
+.topitemlink:hover + .topitemimg {
+    opacity: 0.4;
 }
