@@ -34,6 +34,7 @@
   
 </div>
 </div>
+   <x-shopping-cart-modal />
 
 {{-- end of popular items  --}}
 </x-customer-app-layout>

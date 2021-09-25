@@ -1,6 +1,6 @@
  <div class="cart-icon relative">
                     <svg 
-                        
+                        x-data
                         @click="
                           $dispatch('opencart')
                           "

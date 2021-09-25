@@ -16,4 +16,10 @@ class HomeController extends Controller
   {
     return view('customer.shop');
   }
+  public function show($name)
+  {
+      $item=Item::where('name',$name)->first(); 
+
+      return view('customer.detail',compact('item'));
+  }
 }
