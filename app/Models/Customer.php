@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
 use App\Http\Traits\FilterFieldTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -35,6 +36,9 @@ class Customer extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-   
+   public function comment()
+   {
+       return $this->hasMany(Comment::class);
+   }
 
 }

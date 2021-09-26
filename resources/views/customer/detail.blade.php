@@ -4,7 +4,7 @@
                      <div class="text-sm breadcrumbs">
                         <ul>
                             <li>
-                                <a href="{{route('home.shop')}}">Shop</a>
+                                <a href="{{url()->previous()}}">Shop</a>
                             </li> 
                             <li>
                                {{$item->name}}
@@ -14,11 +14,11 @@
                 </div>
                 {{-- banner --}}
 
-       <div class="mx-4 md:mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300 flex justify-start space-x-2">
-        <div class="w-full md:w-1/2 lg:w-1/3  flex-col">
+       <div class="mx-4 md:mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300 flex-none md:flex justify-start md:space-x-4">
+        <div class="w-full  md:w-1/2 lg:w-1/3  flex-col">
             <img src="{{asset($item->img1)}}" class="w-full">
              
-            <div class="flex-none my-2 overflow-x-auto">
+            <div class="w-100 md:w-full flex-none my-2 overflow-x-auto">
                 <div class="flex space-x-1 w-1/4 ">
 
                     <img src="{{asset($item->img1)}}" >
@@ -29,73 +29,124 @@
             
         </div>
         </div>
+        <div class="item-detail md:w-2/4">
+            <h3 class="text-3xl font-semibold py-3">{{$item->name}}</h3>
+            <div class="rating">
+                <p class="text-sm"><span class="text-purple-500">100</span> people like this item</p>
+            </div>
+            <div class="brand py-1">
+                <p class="text-sm inline">
+                        Brand:
+                        <span class="text-purple-500 uppercase">{{$item->brand->name}}</span>
+                </p>
+                <p class="text-sm inline">
+                        Category:
+                        <span class="text-purple-500 uppercase">{{$item->category->category}}</span>
+                </p>
+            </div>
+            <div class="price my-6 md:my-10 ">
+                <h2 class="text-4xl font-light text-purple-600">${{$item->price}}</h2>
+            </div>
+            <div class="promotion ">
+                <p class="text-sm">Promotion:
+                        <span class="badge badge-info">15% discount</span> 
+                </p>
+            </div>
+            <div class="add-to-cart mt-10">
+                 <div class="flex  items-center space-x-3">
+
+                    <label for="">Quantity</label>
+                        <input class="border text-center w-14 " type="text" wire:model="qty"/>
+                        @error('qty')
+                            <span class="text-red-600 text-xs font-semibold">{{$message}}</span>
+                        @enderror
+                       </div>
+                 <div class="flex md:justify-start my-3  space-x-3 ">
+                              <button 
+                                   x-data
+                                   wire:click="add()"
+                                  @click="
+                                          $dispatch('addtocart')
+                                          "
+                                  class="w-48 py-3 text-center   rounded-md bg-purple-500 shadow-md text-white">Buy Now</button>
+                              <button 
+                                   x-data
+                                   wire:click="add()"
+                                  @click="
+                                          $dispatch('addtocart')
+                                          "
+                                  class="w-48 py-3 text-center  rounded-md bg-yellow-500 shadow-md text-white">Add To Cart</button>
+                           </div>
+            </div>
+        </div>
+    <div class="max-w-1/4 recommended-list hidden md:block">
+                                    
+        <h2 class="p-2">Similar Items</h2>         
     
+        <div class="recommends  space-y-3">    
+    <div class=" artboard  flex  justify-start">
+                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
+                <div class="px-4">
+                    <h2 class="card-title text-sm">{{$item->name}}
+                    <div class="badge mx-2">NEW</div>
+                    </h2> 
+                    <p class="">{{$item->desc}}</p> 
+                    {{-- <div class="card-actions">
+                    <button class="btn btn-primary">Get Started</button> 
+                    <button class="btn btn-ghost">More info</button>
+                    </div> --}}
+                </div>
+                </div>
+    <div class=" artboard  flex  justify-start">
+                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
+                <div class="px-4">
+                    <h2 class="card-title text-sm">{{$item->name}}
+                    <div class="badge mx-2">NEW</div>
+                    </h2> 
+                    <p class="">{{$item->desc}}</p> 
+                    {{-- <div class="card-actions">
+                    <button class="btn btn-primary">Get Started</button> 
+                    <button class="btn btn-ghost">More info</button>
+                    </div> --}}
+                </div>
+                </div>
+    <div class=" artboard  flex  justify-start">
+                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
+                <div class="px-4">
+                    <h2 class="card-title text-sm">{{$item->name}}
+                    <div class="badge mx-2">NEW</div>
+                    </h2> 
+                    <p class="">{{$item->desc}}</p> 
+                    {{-- <div class="card-actions">
+                    <button class="btn btn-primary">Get Started</button> 
+                    <button class="btn btn-ghost">More info</button>
+                    </div> --}}
+                </div>
+                </div>
+    <div class=" artboard  flex  justify-start">
+                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
+                <div class="px-4">
+                    <h2 class="card-title text-sm">{{$item->name}}
+                    <div class="badge mx-2">NEW</div>
+                    </h2> 
+                    <p class="">{{$item->desc}}</p> 
+                    {{-- <div class="card-actions">
+                    <button class="btn btn-primary">Get Started</button> 
+                    <button class="btn btn-ghost">More info</button>
+                    </div> --}}
+                </div>
+                </div>
+            </div>
+            <a href="/shop?brand={{$item->brand->name}}" class="flex justify-center px-2 py-3 uppercase hover:bg-purple-500 hover:text-white cursor-pointer"> view more</a>
+            </div>
     </div>
-         <div class="mx-4 md:mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300 ">
+    <div  tabindex="0"  class=" mx-4 md:mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300 ">
             <h3 class="uppercase font-semibold">Product Detail of {{$item->name}}</h3>
             <p class="my-2">{{$item->desc}}</p>
         </div>
-         <div class="mx-4 md:mx-10 duration-600 bg-white mt-2 rounded-lg shadow-sm px-4   py-3  border border-1 border-gray-300 ">
-            <h3 class="uppercase font-semibold">Comments Section </h3>
-            <div class="comments-section">
-               
-               {{-- start of commens   --}}
-                <div class="comment flex justify-start items-center">
-                    <div class="avatar placeholder p-4">
-                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-14 h-14">
-                                            <span>MX</span>
-                                        </div>
-                     </div>
-                     <p class="text-sm">Exercitation est commodo adipisicing nostrud eu pariatur amet eu nisi officia aute minim officia non. Sit laboris ipsum in Lorem sint ullamco et irure ea dolore sit mollit. Culpa id magna labore ad in anim voluptate.</p>
-                     
-                </div>
-                <div class="comment flex justify-start items-center">
-                    <div class="avatar placeholder p-4">
-                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-14 h-14">
-                                            <span>MX</span>
-                                        </div>
-                     </div>
-                     <p class="text-sm">Exercitation est commodo adipisicing nostrud eu pariatur amet eu nisi officia aute minim officia non. Sit laboris ipsum in Lorem sint ullamco et irure ea dolore sit mollit. Culpa id magna labore ad in anim voluptate.</p>
-                     
-                </div>
-                <div class="comment flex justify-start items-center">
-                    <div class="avatar placeholder p-4">
-                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-14 h-14">
-                                            <span>MX</span>
-                                        </div>
-                     </div>
-                     <p class="text-sm">Exercitation est commodo adipisicing nostrud eu pariatur amet eu nisi officia aute minim officia non. Sit laboris ipsum in Lorem sint ullamco et irure ea dolore sit mollit. Culpa id magna labore ad in anim voluptate.</p>
-                     
-                </div>
-                <div class="comment flex justify-start items-center">
-                    <div class="avatar placeholder p-4">
-                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-14 h-14">
-                                            <span>MX</span>
-                                        </div>
-                     </div>
-                     <p class="text-sm">Exercitation est commodo adipisicing nostrud eu pariatur amet eu nisi officia aute minim officia non. Sit laboris ipsum in Lorem sint ullamco et irure ea dolore sit mollit. Culpa id magna labore ad in anim voluptate.</p>
-                     
-                </div>
-                <div class="comment flex justify-start items-center">
-                    <div class="avatar placeholder p-4">
-                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-14 h-14">
-                                            <span>MX</span>
-                                        </div>
-                     </div>
-                     <p class="text-sm">Exercitation est commodo adipisicing nostrud eu pariatur amet eu nisi officia aute minim officia non. Sit laboris ipsum in Lorem sint ullamco et irure ea dolore sit mollit. Culpa id magna labore ad in anim voluptate.</p>
-                     
-                </div>
+        
                  
-                {{-- end of comments  --}}
-            
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Your Comment</span>
-                </label> 
-                <textarea class="textarea h-24 textarea-bordered" placeholder="Feel free to share your opinions..."></textarea>
-                </div>
+            <livewire:item.comment-section :item='$item' />
+      
             </div>
-            <button class="btn btn-primary my-2 ">Submit</button> 
-
-        </div>
 </x-customer-app-layout>

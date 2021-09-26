@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Color;
+use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\Supplier;
@@ -54,5 +55,6 @@ class DatabaseSeeder extends Seeder
         ItemDetail::factory(10)->create([
             'item_id' => Item::latest()->first()->id,
         ]);
+        Item::latest()->each(function($item){return Comment::factory(5)->create(['item_id'=>$item->id]);});
     }
 }

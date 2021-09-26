@@ -22,7 +22,7 @@
 <div class="w-100 carousel">
   @forelse ($topitems as $item)
       <div class="topitem w-1/4 carousel-item cursor-pointer relative ">
-         <div class="topitemlink  absolute top-40 left-28 text-white p-4 border border-1 border-white rounded-3xl">View Detail</div>
+         <a href="{{route('shop.detail', $item->name)}}" class="topitemlink hover:border-purple-500 hover:text-purple-500 absolute top-40 left-28 text-white p-4 border border-1 border-white rounded-3xl">View Detail</a>
         <img src="{{$item->img1}}" class="topitemimg w-full hover:opacity-40" alt="">
      </div> 
   @empty
@@ -34,7 +34,6 @@
   
 </div>
 </div>
-   <x-shopping-cart-modal />
 
 {{-- end of popular items  --}}
 </x-customer-app-layout>

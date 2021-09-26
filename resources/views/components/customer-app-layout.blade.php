@@ -11,10 +11,12 @@
 
                 </script> 
     @livewireStyles
+ <x-livewire-alert::scripts />
 
-    {{-- <style>
+
+    <style>
            [x-cloak=""] { display: none; }
-    </style> --}}
+    </style>
     <title>FS CLOTHING</title>
 </head>
 <body>
@@ -23,6 +25,8 @@
     <div>
         {{$slot}}
     </div>
+       <x-shopping-cart-modal />
+
     @include('customer.layouts.footer')
 
 </body>

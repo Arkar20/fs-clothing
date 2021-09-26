@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Brand;
+use App\Models\Comment;
 use App\Models\Category;
 use App\Models\ItemDetail;
 use App\Http\Traits\FilterFieldTrait;
@@ -15,6 +16,9 @@ class Item extends Model
     use HasFactory, FilterFieldTrait, TableHeadersTrait;
 
     protected $guarded = [];
+    
+    protected $withCount = ['comments'];
+
 
     public function brand()
     {
@@ -35,6 +39,11 @@ class Item extends Model
             ->latest()
             ->get();
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
     public function getUniqueSize()
     {
         return $this->itemdetails()
