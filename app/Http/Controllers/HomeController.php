@@ -19,7 +19,8 @@ class HomeController extends Controller
   public function show($name)
   {
       $item=Item::where('name',$name)->first(); 
+      $recommend_items=$item->where('brand_id',$item->brand_id)->take(5)->get();
 
-      return view('customer.detail',compact('item'));
+      return view('customer.detail',compact('item','recommend_items'));
   }
 }

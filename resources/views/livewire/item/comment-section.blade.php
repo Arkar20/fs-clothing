@@ -22,18 +22,29 @@
                                         </div>
                      </div>
                     <div>
-                        <p class="text-md font-semibold">{{$comment->customer->name}}</p> 
+                        <p class="text-md font-semibold">{{$comment->customer->name}}
+                             @if($comment->is_favourite)
+                        <span class="badge badge-sm ">Favorite</span> 
+                        @endif
+                        </p>
+                  
                         <p class="text-sm">{{$comment->desc}}
                             <span class="text-2xs text-gray-400">{{$comment->created_at->diffForHumans()}}</span>
                         </p>
                     </div>
-                    <button
-                         wire:click="deleteComment({{$comment->id}})"
-                         class="btn btn-error  btn-sm border-red-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current">   
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>                       
-                        </svg>
-                    </button> 
+                    <div class="ml-auto space-x-2">
+                        <button
+                             wire:click="deleteComment({{$comment->id}})"
+                             class="btn btn-error  btn-sm border-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current">   
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>                       
+                            </svg>
+                        </button> 
+                        @if(!$comment->is_favourite)
+                        <button class="btn btn-sm btn-accent" wire:click="markAsFav({{$comment->id}})">Mark As Favorite</button> 
+                        @endif
+                    </div>
+
                 </div>
                      @empty
                      <p>No Comments</p>

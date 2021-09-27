@@ -1,10 +1,14 @@
-<div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content ">
-  <div class="px-2 mx-2 navbar-start">
-    <span class="text-lg font-bold">
-           FS CLOTHING
-          </span>
+<div class="shadow-lg bg-neutral text-neutral-content">
+
+<div class=" navbar mb-2 mx-4 md:mx-10  ">
+  <div class="py-2  navbar-start">
+    <p class="text-lg font-bold">
+           FS 
+           
+         <span class="text-purple-500">CLOTHING</span>
+          </p>
   </div> 
-  <div class="hidden px-2 mx-2 navbar-center lg:flex">
+  <div class="hidden p-2 navbar-center lg:flex">
     <div class="flex items-stretch">
       <a class="btn btn-ghost btn-sm rounded-btn" href="/">
               Home
@@ -31,4 +35,5 @@
 
     </button>
   </div>
+</div>
 </div>

@@ -16,7 +16,7 @@ x-init="
            
     "
     @addtocart.window="
-                         edit=true
+                      edit=true
                       shoppingcart=false
                       addtocart=true
                     

@@ -49,12 +49,19 @@ class CommentSection extends Component
     }
     public function deleteComment(Comment $comment)
     {
-        // dd($comment);
-        // $comment->delete();
-
-        // dd($comment);
        $this->confirmDialog();
        $this->commentToDelete=$comment;
+    }
+    public function markAsFav(Comment $comment)
+    {
+        $this->markAllNotFavourite();
+        $comment->update(['is_favourite'=>true]);
+        
+    }
+    public function markAllNotFavourite()
+    {
+        Comment::where('item_id',$this->item->id)->update(['is_favourite'=>false]);
+       
     }
     public function confirmed()
     {
@@ -63,10 +70,11 @@ class CommentSection extends Component
 
     }
 
+
     public function render()
     {
         return view('livewire.item.comment-section',['comments'=>
-                $this->item->comments()->latest()->simplePaginate(5)]
+                $this->item->comments()->orderBy('is_favourite','desc')->orderBy('created_at','desc')->simplePaginate(5)]
             );
     }
 }

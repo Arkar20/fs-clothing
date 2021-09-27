@@ -45,16 +45,19 @@ class DatabaseSeeder extends Seeder
             ->count(10)
             ->create();
 
-        Item::factory(10)->create();
+        // Item::factory(10)->create();
 
         $sizes = ['small', 'medium', 'large', 'extra large'];
         foreach ($sizes as $size) {
             Size::factory()->create(['size' => $size]);
         }
 
-        ItemDetail::factory(10)->create([
-            'item_id' => Item::latest()->first()->id,
-        ]);
+        // Brand::all()->each(function($brand){ return Item::factory(5)->create(['brand_id'=>$brand->id]);  });
+
+        // ItemDetail::factory(10)->create([
+        //     'item_id' => Item::latest()->first()->id,
+        // ]);
+
         Item::latest()->each(function($item){return Comment::factory(5)->create(['item_id'=>$item->id]);});
     }
 }

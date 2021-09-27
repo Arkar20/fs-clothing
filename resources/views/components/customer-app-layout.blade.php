@@ -19,10 +19,19 @@
     </style>
     <title>FS CLOTHING</title>
 </head>
-<body>
+<body 
+    x-data
+    x-init="
+        {{-- alert('hello')   --}}
+     Livewire.on('goToTop',()=>{
+
+        content=document.querySelector('.content')
+        content.scrollIntoView({behavior:'smooth'})
+     })
+    ">
     
     @include('customer.layouts.navbar')
-    <div>
+    <div class="content">
         {{$slot}}
     </div>
        <x-shopping-cart-modal />

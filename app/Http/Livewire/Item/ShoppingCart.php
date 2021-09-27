@@ -52,6 +52,12 @@ class ShoppingCart extends Component
         //         'Your Quantity Exceeded the Instock Quantity.'
         //     );
         // }
+        $cartCount=$this->checkCart($key);
+
+        if(!$cartCount->count()==0){
+             $this->loadcart();
+            return $this->errorAlert('Invalid Quantity');
+        }
 
         Cart::update($key, Cart::get($key)->qty + 1);
         $this->loadcart();
@@ -62,6 +68,16 @@ class ShoppingCart extends Component
         Cart::update($key, Cart::get($key)->qty - 1);
         $this->loadcart();
         $this->emit('itemremovedfromcart');
+    }
+    public function checkCart($key)
+    {
+        $this->stockqty = ItemDetail::find(Cart::get($key)->id)->quantity;
+        // dd($this->stockqty);
+       return  Cart::search(function ($cartItem, $rowId) {
+              if($this->stockqty < $cartItem->qty+1 ) {
+                return $cartItem;
+            }
+            });
     }
     public function render()
     {

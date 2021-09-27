@@ -52,90 +52,31 @@
                         <span class="badge badge-info">15% discount</span> 
                 </p>
             </div>
-            <div class="add-to-cart mt-10">
-                 <div class="flex  items-center space-x-3">
+            
 
-                    <label for="">Quantity</label>
-                        <input class="border text-center w-14 " type="text" wire:model="qty"/>
-                        @error('qty')
-                            <span class="text-red-600 text-xs font-semibold">{{$message}}</span>
-                        @enderror
-                       </div>
-                 <div class="flex md:justify-start my-3  space-x-3 ">
-                              <button 
-                                   x-data
-                                   wire:click="add()"
-                                  @click="
-                                          $dispatch('addtocart')
-                                          "
-                                  class="w-48 py-3 text-center   rounded-md bg-purple-500 shadow-md text-white">Buy Now</button>
-                              <button 
-                                   x-data
-                                   wire:click="add()"
-                                  @click="
-                                          $dispatch('addtocart')
-                                          "
-                                  class="w-48 py-3 text-center  rounded-md bg-yellow-500 shadow-md text-white">Add To Cart</button>
-                           </div>
-            </div>
+           <livewire:customer.item-detail-section :item="$item"/>
+
+           
         </div>
     <div class="max-w-1/4 recommended-list hidden md:block">
                                     
         <h2 class="p-2">Similar Items</h2>         
     
         <div class="recommends  space-y-3">    
-    <div class=" artboard  flex  justify-start">
+                
+            @foreach($recommend_items as $item )
+            <div class=" artboard  flex  justify-start">
                 <img src="{{asset($item->img1)}}" class="w-20 h-20" />
                 <div class="px-4">
                     <h2 class="card-title text-sm">{{$item->name}}
                     <div class="badge mx-2">NEW</div>
                     </h2> 
                     <p class="">{{$item->desc}}</p> 
-                    {{-- <div class="card-actions">
-                    <button class="btn btn-primary">Get Started</button> 
-                    <button class="btn btn-ghost">More info</button>
-                    </div> --}}
+                    
                 </div>
                 </div>
-    <div class=" artboard  flex  justify-start">
-                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
-                <div class="px-4">
-                    <h2 class="card-title text-sm">{{$item->name}}
-                    <div class="badge mx-2">NEW</div>
-                    </h2> 
-                    <p class="">{{$item->desc}}</p> 
-                    {{-- <div class="card-actions">
-                    <button class="btn btn-primary">Get Started</button> 
-                    <button class="btn btn-ghost">More info</button>
-                    </div> --}}
-                </div>
-                </div>
-    <div class=" artboard  flex  justify-start">
-                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
-                <div class="px-4">
-                    <h2 class="card-title text-sm">{{$item->name}}
-                    <div class="badge mx-2">NEW</div>
-                    </h2> 
-                    <p class="">{{$item->desc}}</p> 
-                    {{-- <div class="card-actions">
-                    <button class="btn btn-primary">Get Started</button> 
-                    <button class="btn btn-ghost">More info</button>
-                    </div> --}}
-                </div>
-                </div>
-    <div class=" artboard  flex  justify-start">
-                <img src="{{asset($item->img1)}}" class="w-20 h-20" />
-                <div class="px-4">
-                    <h2 class="card-title text-sm">{{$item->name}}
-                    <div class="badge mx-2">NEW</div>
-                    </h2> 
-                    <p class="">{{$item->desc}}</p> 
-                    {{-- <div class="card-actions">
-                    <button class="btn btn-primary">Get Started</button> 
-                    <button class="btn btn-ghost">More info</button>
-                    </div> --}}
-                </div>
-                </div>
+            @endforeach
+    
             </div>
             <a href="/shop?brand={{$item->brand->name}}" class="flex justify-center px-2 py-3 uppercase hover:bg-purple-500 hover:text-white cursor-pointer"> view more</a>
             </div>

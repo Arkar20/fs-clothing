@@ -28,9 +28,9 @@ class ItemFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'desc' => $this->faker->paragraph(1),
-            'category_id' => Category::factory()->create(),
-            'brand_id' => Brand::factory()->create(),
-            'user_id' => User::factory()->create(),
+            'category_id' => Category::factory()->create()->id,
+            'brand_id' => Brand::factory()->create()->id,
+            'user_id' => User::factory()->create()->id,
             'price' => $price,
             'retail_price' => $price - 10,
             'total_qty' => 10,
