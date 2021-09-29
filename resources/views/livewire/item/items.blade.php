@@ -101,9 +101,12 @@
                         <img 
                             src="{{$item->img1}}"
                            width="100%"
-                           @click="
-                                    location='{{route('shop.detail',$item->name)}}'
-                                    "
+                           @if(request()->route()->getName()=='home.shop')
+                           {{-- {{dd('here')}} --}}
+                            @click="
+                                        location='{{route('shop.detail',$item->name)}}'
+                                        "
+                            @endif
                         />
                     </div>
                     <div class="w-full bg-white flex justify-between items-center px-2 py-3">

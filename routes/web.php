@@ -41,6 +41,10 @@ Route::post('/login',[CustomerController::class,'store'])->name('customer.store'
 Route::post('/logout',[CustomerController::class,'logout'])->name('customer.logout');
 
 
+Route::get('/checkout',function(){
+    return view('customer.checkout');
+})->name('customer.checkout');
+
 
 Route::prefix('admin')->middleware('auth:web')->group(function(){
 
@@ -85,6 +89,7 @@ Route::get('/profile/{user}',function(User $user){
     $user=$user?:auth()->user();
     return view('admin.profile',compact('user'));
 })->name('admin.profile');
+
 
 Route::get('/staffs/manage',[UserController::class,'manageStaff'])->name('staffs.manage');
 

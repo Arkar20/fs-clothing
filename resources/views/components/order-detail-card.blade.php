@@ -1,5 +1,5 @@
-<div class=" m-10  ">
-  <div class="overflow-x-auto shadow-xl border-1 border-gray-200"> 
+<div class=" my-3 py-3  ">
+  <div class="overflow-x-auto shadow-xl border-1 border-gray-200 px-10"> 
     <p class="font-semibold text-2xl mt-10 mb-5">Order Detail information</p>
     <div class="w-full flex-col space-y-4">
       <div class="w-full flex justify-between text-md">

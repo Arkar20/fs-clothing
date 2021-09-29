@@ -41,9 +41,9 @@ class DatabaseSeeder extends Seeder
             ->count(10)
             ->create();
 
-        Delivery::factory()
-            ->count(10)
-            ->create();
+        // Delivery::factory()
+        //     ->count(10)
+        //     ->create();
 
         // Item::factory(10)->create();
 
@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         foreach ($sizes as $size) {
             Size::factory()->create(['size' => $size]);
         }
+        Brand::all()->each(function($brand){Item::factory(5)->create(['brand_id'=>$brand->id]);});
 
         // Brand::all()->each(function($brand){ return Item::factory(5)->create(['brand_id'=>$brand->id]);  });
 

@@ -53,11 +53,9 @@
                         @enderror
                        </div>
                  <div class="flex md:justify-start my-3  space-x-3 ">
-                              <button 
-                                   x-data
-                               
-                                 
-                                  class="w-48 py-3 text-center   rounded-md bg-purple-500 shadow-md text-white">Buy Now</button>
+                              <a 
+                                    href="/checkout"  
+                                  class="w-48 py-3 text-center rounded-md bg-purple-500 shadow-md text-white">Buy Now</a>
                               <button 
                                    x-data
                                    wire:click="add"

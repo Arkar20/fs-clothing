@@ -64,7 +64,7 @@
     
         <div class="recommends  space-y-3">    
                 
-            @foreach($recommend_items as $item )
+            @forelse($recommend_items as $item )
             <div class=" artboard  flex  justify-start">
                 <img src="{{asset($item->img1)}}" class="w-20 h-20" />
                 <div class="px-4">
@@ -75,7 +75,9 @@
                     
                 </div>
                 </div>
-            @endforeach
+            @empty
+            <p>No Recommended Items.</p>
+            @endforelse
     
             </div>
             <a href="/shop?brand={{$item->brand->name}}" class="flex justify-center px-2 py-3 uppercase hover:bg-purple-500 hover:text-white cursor-pointer"> view more</a>

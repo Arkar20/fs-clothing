@@ -60,7 +60,6 @@ class ItemDetailSection extends Component
         //  dd($cartItem->count());
             if(!$cartItem->count()==0){
                return $this->errorAlert('Invalid Quantity');
-
             }
              try {
        
