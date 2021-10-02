@@ -57,9 +57,14 @@
                            <x-dropdownfield label="All Brands"
                                             table="brands" 
                                             :options="$brands" model="brand"/>
+
                            <x-dropdownfield label="All Categories"
                                             table="categories"
                                             :options="$categories" model="category"/>
+
+                                {{-- start of price slider  --}}
+
+                                {{-- end of price slider  --}}
                          
                     </x-slot>
                    
@@ -92,9 +97,7 @@
                 {{-- start of product single --}}
                
                 <div 
-                {{-- @if (request()->route()->getName()=='home.shop')
-                     @click="window.location='/shop/{{$item->name}}'"
-                @endif --}}
+                
                 wire:click='selectToDisplay({{$item}})'
                 class="product-single border border-1 border-gray-200 shadow-lg hover:border-gray-900 cursor-pointer" >
                     <div >

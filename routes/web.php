@@ -36,10 +36,10 @@ Route::middleware('auth:customer')->get('/',function(){
 Route::get('/',[HomeController::class,'index']);
 Route::get('/shop',[HomeController::class,'shop'])->name('home.shop');
 Route::get('/shop/{name}',[HomeController::class,'show'])->name('shop.detail');
-Route::get('/login',[CustomerController::class,'create'])->name('customer.create');
-Route::post('/login',[CustomerController::class,'store'])->name('customer.store');
+Route::get('/login',[CustomerController::class,'viewlogin'])->name('customer.viewlogin');
+Route::post('/login',[CustomerController::class,'login'])->name('customer.login');
 Route::post('/logout',[CustomerController::class,'logout'])->name('customer.logout');
-
+Route::get('/profile/{customer}',[CustomerController::class,'show'])->name('customer.profile')->middleware('auth:customer');
 
 Route::get('/checkout',function(){
     return view('customer.checkout');
