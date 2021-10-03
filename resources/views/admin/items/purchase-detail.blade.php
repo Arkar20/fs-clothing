@@ -41,24 +41,25 @@
         <th>Color</th>
         <th>Quantity</th>
         <th>Price ($)</th>
-        <th>Date</th>
+        <th>Total Price</th>
       </tr>
     </thead> 
     <tbody>
-        {{-- {{dd($purchase->purchase_items)}} --}}
-    @forelse ($purchase->purchase_items as $index=>$record)
-        <tr class="text-center">
-        {{-- {{dd($record->item)}} --}}
+      {{-- {{dd($purchase)}} --}}
+        {{-- {{ddd($purchase)}} --}}
+    @forelse ($purchase_records as $index=>$record)
 
-        <th>{{$record->item->name}}</th> 
-        <td>{{$record->size->size}}</td> 
-        <td>{{$record->color->color}}</td> 
+        <tr class="text-center">
+        
+        <td>{{$record->getItemName()}}</td> 
+        <td>{{$record->getItemSize()}}</td> 
+        <td>{{$record->getItemColor()}}</td> 
         <td>{{$record->quantity}}</td> 
-        <td>{{$record->item->price}}</td> 
-        <td>{{$record->created_at}}
-            <span class="text-sm font-semibold">({{$record->created_at->diffForHumans()}})</span>
-        </td> 
-</td>
+        <td>{{$record->price}}</td> 
+        <td>{{$purchase->total_amount}}</td>  
+       {{-- <td>{{$record->created_at}}  --}}
+        
+
       </tr>
     @empty
         

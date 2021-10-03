@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\ItemDetail;
+use App\Models\PurchaseItem;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Item\SizeSection;
 use App\Http\Controllers\HomeController;
@@ -81,7 +82,14 @@ Route::get('/purchase/manage', function() {
 
 
 Route::get('/purchase/{purchase}', function(Purchase $purchase) {
-    return view('admin.items.purchase-detail',['purchase'=>$purchase->load('purchase_items')]);
+  
+// dd($purchase);
+
+    return view('admin.items.purchase-detail',
+    [
+        'purchase'=> $purchase,
+        'purchase_records'=>$purchase->purchase_records()->with('item_detail')->get(),
+]);
 })->name('purchase.detail');
 
 

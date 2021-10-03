@@ -25,6 +25,11 @@ class SupplierSection extends Component
     public $supplierToUpdate;
     public $supplierToDelete;
 
+
+    //filter by start data and end date 
+    public $searchStartDate;
+    public $searchEndDate;
+
     protected $listeners = ['confirmed', 'cancelled'];
 
     protected $rules = [
@@ -106,11 +111,14 @@ class SupplierSection extends Component
     {
         return view('livewire.supplier.supplier-section', [
             'suppliers' => Supplier::FilterSearch('name', $this->search)
+                ->with('purchases')
                 ->FilterSearch('email', $this->search)
                 ->FilterSearch('company_name', $this->search)
                 ->FilterSearch('hotline1', $this->search)
                 ->FilterSearch('hotline2', $this->search)
                 ->FilterSearch('address', $this->search)
+               
+             
                 ->latest()
                 ->paginate(10),
 

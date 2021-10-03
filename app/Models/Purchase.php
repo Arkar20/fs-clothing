@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Supplier;
+use App\Models\PurchaseItem;
+use Illuminate\Support\Carbon;
 use App\Http\Traits\FilterFieldTrait;
 use Illuminate\Database\Eloquent\Model;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -39,11 +41,13 @@ class Purchase extends Model
                 $this->findItemDetail($cart->id)->quantity + $cart->qty,
         ]);
 
-        return $this->findItemDetail($cart->id)
+       return  $this->findItemDetail($cart->id)
             ->item()
             ->update([
                 'total_qty' =>
                     $this->findItemDetail($cart->id)->item->total_qty +
+                    $cart->qty,
+                'purchase_count'=> $this->findItemDetail($cart->id)->item->purchase_count +
                     $cart->qty,
             ]);
     }
@@ -62,7 +66,7 @@ class Purchase extends Model
     }
     public function purchase_items()
     {
-        return $this->belongsToMany(ItemDetail::class, 'purchase_items')->using(
+        return $this->belongsToMany(ItemDetail::class, 'purchase_item')->using(
             PurchaseItem::class
         );
     }
@@ -70,10 +74,27 @@ class Purchase extends Model
     {
         return $this->purchase_items()->itemdetails();
     }
-    
+   public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
     // public function getAllInformation()
     // {
     //     return $this->purchase_items()->with('item')->get();
+    // }
+    public function purchase_records()
+    {
+        return $this->hasMany(PurchaseItem::class);
+    }
+     
+    // public function getTotalPrice()
+    // {
+    //     return $this->price * $this->quantity;
     // }
 
   

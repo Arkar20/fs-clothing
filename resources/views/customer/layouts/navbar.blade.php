@@ -64,8 +64,7 @@ class=" navbar  mx-4 md:mx-10  relative">
      </button>
     </li> 
     </form>
-  @endauth
- @if(!auth()->check())
+ 
     <li>
       <a href="{{route('customer.profile',auth()->guard('customer')->id())}}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">        

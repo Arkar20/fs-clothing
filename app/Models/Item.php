@@ -19,7 +19,7 @@ class Item extends Model
     
     protected $withCount = ['comments'];
 
-
+    
     public function brand()
     {
         return $this->belongsTo(Brand::class);
@@ -43,6 +43,10 @@ class Item extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    // public function purchases()
+    // {
+    //     return $this->hasManyThrough(PurchaseItem::class, ItemDetail::class);
+    // }
     
     public function getUniqueSize()
     {
@@ -71,4 +75,6 @@ class Item extends Model
                 ->orWhere($field, $categories->get($metadata));
         });
     }
+    
+  
 }

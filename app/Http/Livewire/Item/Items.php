@@ -15,8 +15,10 @@ class Items extends Component
     public $brand;
     public $category;
     public $search;
+    public $item;
+    public $filter;
 
-    public $queryString = ['brand', 'category'];
+    public $queryString = ['brand', 'category','item','filter'];
 
     public function updated()
     {
@@ -44,7 +46,8 @@ class Items extends Component
         $categories = Category::all()->pluck('id', 'category');
 
         return view('livewire.item.items', [
-            'items' => Item::when($this->brand, function ($item) use ($brands) {
+            'items' => Item::
+            when($this->brand, function ($item) use ($brands) {
                 return $item->where('brand_id', $brands->get($this->brand));
             })
                 ->when($this->category, function ($item) use ($categories) {
@@ -60,6 +63,9 @@ class Items extends Component
                         '%' . $this->search . '%'
                     );
                 })
+                ->FilterByPurchaseOrderCount($this->filter)
+                
+               
 
                 ->latest()
                 ->paginate(16),

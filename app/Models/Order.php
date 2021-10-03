@@ -39,6 +39,7 @@ class Order extends Model
                     'total_qty' =>
                         $this->findItemDetail($cart->id)->item->total_qty -
                         $cart->qty,
+                    'order_count'=>$this->findItemDetail($cart->id)->item->order_count +  $cart->qty,
                 ]);
         }
          public function findItemDetail($itemidincart)

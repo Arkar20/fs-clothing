@@ -62,9 +62,17 @@
                                             table="categories"
                                             :options="$categories" model="category"/>
 
-                                {{-- start of price slider  --}}
-
-                                {{-- end of price slider  --}}
+                                
+                @auth('web')
+                       <select class="my-2  rounded-xl border-1 border-purple-400 focus:border-purple-600" 
+                                wire:model='filter'>
+                                        <option value="All">All</option>
+                                        <option value="Top Item">Top Items</option>
+                                        <option value="Top Purchase Items">Top Purchase Items</option>
+                                        <option value="Top Order Items">Top Orders Items</option>
+                                 </select>
+                @endauth                    
+                     
                          
                     </x-slot>
                    
