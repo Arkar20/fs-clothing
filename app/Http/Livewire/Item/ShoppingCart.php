@@ -70,29 +70,41 @@ class ShoppingCart extends Component
     }
     public function decreaseCart($key)
     {
-        $cartCount=$this->checkCart($key);
-            if(!$cartCount->count()==0){
-                        $this->loadcart();
-                        return $this->errorAlert('Invalid Quantity');
-                    }
-        Cart::update($key, Cart::get($key)->qty - 1);
-        $this->checkRetailPrice($key);
+        
+            $this->getItemDetail($key);
+    
+        $cartqty=Cart::get($key)->qty;
 
+        
+        Cart::update($key,$cartqty  - 1);
+        if(!Cart::content())
+        { 
+            return $this->errorAlert('Invalid Quantity');
+           
+        }
+        
         $this->loadcart();
         $this->emit('itemremovedfromcart');
     }
+       
+    
     public function checkCart($key)
     {
-        if(!$key) $this->errorAlert("Cart has no Items");
+       
 
+            $this->getItemDetail($key);
 
-        $this->itemdetail = ItemDetail::find(Cart::get($key)->id);
-        // dd($this->stockqty);
-       return  Cart::search(function ($cartItem, $rowId) {
+               return  Cart::search(function ($cartItem, $rowId) {
               if($this->itemdetail->quantity < $cartItem->qty+1 ) {
                 return $cartItem;
             }
             });
+    }
+    public function getItemDetail($key)
+    {
+            $cartid=Cart::get($key)->id;
+        
+            $this->itemdetail = ItemDetail::find($cartid);
     }
      public function checkRetailPrice($key)
     {

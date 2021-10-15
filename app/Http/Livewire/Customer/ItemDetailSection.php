@@ -60,8 +60,9 @@ class ItemDetailSection extends Component
         // dd($this->itemdetail);
   
          $cartItem=$this->checkCart();
+
         //  dd($cartItem->count());
-            if(!$cartItem->count()==0){
+            if(!$cartItem->count()==0 || $this->itemdetail->quantity<$this->qty){
                return $this->errorAlert('Invalid Quantity');
             }
              try {
@@ -77,7 +78,11 @@ class ItemDetailSection extends Component
     public function checkCart()
     {
         $this->validate();
+
+        
         $this->checkRetailPrice();
+
+
        return    Cart::search(function ($cartItem, $rowId) {
                if($cartItem->id==$this->itemdetail->id ){
                 if($this->itemdetail->quantity<$cartItem->qty+$this->qty){

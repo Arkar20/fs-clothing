@@ -15,11 +15,21 @@ class DeliverCheckoutForm extends Component
 
     public $address,$note,$card;
 
+    public $rules=['address'=>'required'];
+
+    public $payment;
     public function orderConfirm()
     {
+           if(!auth()->guard('customer')->check()){
+
+             return $this->errorAlert('Please Login First!');
+        } // return redirect()->route('customer.payment');
+
           if (!$this->totalCart() == 0) {
-             $this->saveOrderRecords();
-            return redirect()->route('home.shop');
+
+                  $order=$this->saveOrderRecords();
+
+                return redirect()->route('customer.payment',$order);
         }         
         
         return $this->errorAlert('No Items In the Cart, Cannot Order!');
@@ -27,6 +37,10 @@ class DeliverCheckoutForm extends Component
     }
       public function saveOrderRecords()
     {
+        
+
+        $this->validate();
+
         $order=Order::create([
             'customer_id' => auth()->id()?:1,
             'total_amount' => (int) Cart::total(0, false, false),
@@ -35,6 +49,8 @@ class DeliverCheckoutForm extends Component
         $order->delivery()->create(['address'=>$this->address,'note'=>$this->note]);
 
         session()->flash('purchased', 'Purchase Completed');
+
+        return $order;
     }
       public function totalCart()
     {

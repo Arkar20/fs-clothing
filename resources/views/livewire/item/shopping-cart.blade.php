@@ -6,9 +6,9 @@
        class="container mx-auto mt-10">
      <div class="flex shadow-md mt-10 mb-4">
       <div class="w-full bg-white px-10 ">
-       
+       @if($cartitems)
         <x-shoppingcart-table :data="$cartitems" :cartcount="$cartcount"/>
-
+        @endif
        
         <div class="flex justify-end items-center my-3">
         

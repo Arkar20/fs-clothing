@@ -14,6 +14,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Color\ColorSection;
 use App\Http\Livewire\Brands\BrandSection;
+use App\Http\Controllers\PaymentController;
 use App\Http\Livewire\Item\Registerproduct;
 use App\Http\Controllers\CustomerController;
 use App\Http\Livewire\Deliver\DeliverySection;
@@ -56,6 +57,8 @@ Route::get('/checkout',function(){
     return view('customer.checkout');
 })->name('customer.checkout');
 
+
+Route::get('/payment/{order}',[PaymentController::class,'show'])->name('customer.payment');
 
 Route::prefix('admin')->middleware('auth:web')->group(function(){
 
