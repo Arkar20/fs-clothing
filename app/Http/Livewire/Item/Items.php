@@ -68,7 +68,7 @@ class Items extends Component
                
 
                 ->latest()
-                ->paginate(16),
+                ->paginate(12),
             'brands' => Brand::all(),
             'categories' => Category::all(),
         ]);

@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Livewire\Item;
+
+use App\Models\Order;
+use Livewire\Component;
+use Livewire\WithPagination;
+use App\Http\Traits\TableHeadersTrait;
+
+class OrderTable extends Component
+{
+    use TableHeadersTrait,WithPagination;
+
+    // search by keywords 
+    public $search;
+
+
+      //filter by start data and end date 
+    public $searchStartDate;
+    public $searchEndDate;
+     
+    public function render()
+    {
+        return view('livewire.item.order-table',
+                    ['purchase_records'=>Order::
+                                            when(auth()->guard('customer')->check(),function($query){
+                                                return $query->where('customer_id',auth()->guard('customer')->id());
+                                            })
+                                            ->when($this->search,function($query){
+                                                return  $query->whereRelation('customer','name','LIKE','%'.$this->search.'%')
+                                            ->orWhereRelation('customer','email','LIKE','%'.$this->search.'%')
+                                            ->orWhereRelation('customer','phnum1','LIKE','%'.$this->search.'%');
+                                            })
+                                          
+                                          ->FilterByStartEndDate($this->searchStartDate,$this->searchEndDate)
+
+                                                  ->latest()
+                                            ->paginate(10)]);
+    }
+}

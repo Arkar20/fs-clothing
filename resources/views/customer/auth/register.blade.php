@@ -35,25 +35,38 @@
                 <p class="text-gray-100">
                     or use email your account
                 </p>
-                <form action="{{route('customer.login')}}" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto" method="POST">
+                <form action="{{route('customer.store')}}" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto" method="POST">
                     @csrf
                     <div class="pb-2 pt-4">
-                        <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black">
-                        @error('email')
-                           <span class="text-red-500 text-sm text-left">{{$message}}</span>
+                        <input type="text" name="name" id="email" placeholder="Name" class="block w-full p-4 text-lg rounded-sm bg-black" value="{{old('name')}}">
+                        @error('name')
+                            <p class="text-left  text-red-500">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="pb-2 pt-4">
-                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Password">
-                         @error('password')
-                           <span class="text-red-500 text-sm text-left">{{$message}}</span>
-                        @enderror
+                        <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black" value="{{old('email')}}">
                     </div>
-                    <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
-                        <a href="#">Forgot your password?</a>
+                      @error('email')
+                        <p class="text-left text-red-500">{{$message}}</p>
+                    @enderror
+                    <div class="pb-2 pt-4">
+                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Password" >
                     </div>
+                      @error('password')
+                        <p class="text-left text-red-500">{{$message}}</p>
+                    @enderror
+                    <div class="pb-2 pt-4">
+                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password"  name="password_confirmation"  id="password" placeholder="Confirm Password">
+                    </div>
+                    <div class="pb-2 pt-4">
+                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="text" name="address" id="password" placeholder="Address" value="{{old('address')}}">
+                    </div>
+                      @error('address')
+                        <p class="text-left text-red-500">{{$message}}</p>
+                    @enderror
+                   
                     <div class="px-4 pb-2 pt-4">
-                        <button class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">sign in</button>
+                        <button class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">sign up</button>
                     </div>
 
                     <div class="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">

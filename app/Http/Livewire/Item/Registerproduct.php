@@ -22,15 +22,17 @@ class Registerproduct extends Component
     public $img1;
     public $img2;
     public $img3;
+    public $retail_qty;
 
     protected $rules = [
         'name' => 'required|min:2|max:255|unique:items',
         'price' => 'required|numeric',
         'retail_price' => 'required|numeric',
+        'retail_qty' => 'required|numeric',
         'desc' => 'required|min:5|max:255',
         'brand' => 'required',
         'category' => 'required',
-        'img1' => 'required|mimes:jpg,png',
+        'img1' => 'required|mimes:jpg,png|max:300',
         'img2' => 'required|mimes:jpg,png',
         'img3' => 'required|mimes:jpg,png',
     ];
@@ -43,6 +45,7 @@ class Registerproduct extends Component
             'name' => $this->name,
             'price' => $this->price,
             'retail_price' => $this->retail_price,
+            'retail_qty' => $this->retail_qty,
             'desc' => $this->desc,
             'brand_id' => Brand::where('name', $this->brand)->first()->id,
             'category_id' => Category::where(

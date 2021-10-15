@@ -7,6 +7,8 @@
 
         <x-text-field label="Retail Price"  model='retail_price' type="number"  />
 
+        <x-text-field label="Retail Quanity Limit"  model='retail_qty' type="number"  />
+
         {{-- start of img upload section  --}}
         <div class="img-upload-section flex justify-around space-x-2 my-2">
                 
@@ -27,7 +29,7 @@
         <x-dropdownfield label="All Categories" :options="$categories" model="category" table="categories"/>
 
         <div class="w-full flex justify-end">
-                 <x-loading-confirm wire:target="store"/>
+                 <x-loading-confirm wire:target="store" />
 
                 <button type="reset" class="btn m-2" @click="showModal=false;showUpdate=false">Cancel</button>
         </div>

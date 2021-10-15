@@ -4,13 +4,17 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\OrderItemDetail;
+use App\Http\Traits\FilterFieldTrait;
 use Illuminate\Database\Eloquent\Model;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Propaganistas\LaravelFakeId\RoutesWithFakeIds;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory,RoutesWithFakeIds,FilterFieldTrait;
+
+    protected $with=['customer'];
 
     protected $guarded = [];
 
@@ -48,7 +52,7 @@ class Order extends Model
     }
     public function order_itemdetails()
     {
-        return $this->belongsToMany(ItemDetail::class, 'order_item_details')->using(
+        return $this->belongsToMany(ItemDetail::class, 'order_item_detail')->using(
             OrderItemDetail::class
         );
     }
@@ -64,8 +68,12 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Customer::class);
     
+    }
+        public function order_records()
+    {
+        return $this->hasMany(OrderItemDetail::class);
     }
     public function delivery()
     {

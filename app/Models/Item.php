@@ -9,6 +9,7 @@ use App\Models\ItemDetail;
 use App\Http\Traits\FilterFieldTrait;
 use App\Http\Traits\TableHeadersTrait;
 use Illuminate\Database\Eloquent\Model;
+use Propaganistas\LaravelFakeId\RoutesWithFakeIds;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Item extends Model

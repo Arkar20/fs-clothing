@@ -28,7 +28,7 @@ class CustomerFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' =>
-                Hash::make('iamadmin'), // password
+            Hash::make('iamadmin'), // password
             'remember_token' => Str::random(10),
             'phnum1'=> $this->faker->numerify('###-###-####'),
             'address'=> $this->faker->sentence(),

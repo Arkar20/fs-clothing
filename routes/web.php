@@ -2,6 +2,7 @@
 
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\ItemDetail;
@@ -36,10 +37,19 @@ Route::middleware('auth:customer')->get('/',function(){
 });
 Route::get('/',[HomeController::class,'index']);
 Route::get('/shop',[HomeController::class,'shop'])->name('home.shop');
-Route::get('/shop/{name}',[HomeController::class,'show'])->name('shop.detail');
+Route::get('/shop/{item}',[HomeController::class,'show'])->name('shop.detail');
+
+Route::get('/register',[HomeController::class,'register'])->name('customer.register');
+Route::post('/register',[CustomerController::class,'store'])->name('customer.store');
+
+
 Route::get('/login',[CustomerController::class,'viewlogin'])->name('customer.viewlogin');
 Route::post('/login',[CustomerController::class,'login'])->name('customer.login');
 Route::post('/logout',[CustomerController::class,'logout'])->name('customer.logout');
+
+
+Route::get('/profile/orderlists',[CustomerController::class,'orderlists'])->name('customer.orderlist')->middleware('auth:customer');
+Route::get('/profile/orderlists/{order}',[CustomerController::class,'orderdetail'])->name('customer.orderdetail')->middleware('auth:customer');
 Route::get('/profile/{customer}',[CustomerController::class,'show'])->name('customer.profile')->middleware('auth:customer');
 
 Route::get('/checkout',function(){
@@ -79,11 +89,12 @@ Route::get('/purchase/manage', function() {
     return view('admin.items.purchase-table');
 })->name('purchase.table');
 //fake id for item details
-
+Route::get('/order/manage',function(){
+    return view('admin.items.order-table');
+})->name('order.table');
 
 Route::get('/purchase/{purchase}', function(Purchase $purchase) {
-  
-// dd($purchase);
+
 
     return view('admin.items.purchase-detail',
     [
@@ -91,6 +102,15 @@ Route::get('/purchase/{purchase}', function(Purchase $purchase) {
         'purchase_records'=>$purchase->purchase_records()->with('item_detail')->get(),
 ]);
 })->name('purchase.detail');
+
+
+Route::get('/order/{order}',function(Order $order){
+  return view('admin.items.order-detail',
+    [
+        'order'=> $order,
+        'order_records'=>$order->order_records()->with('item_detail')->get(),
+]);  
+})->name('order.detail');
 
 
 Route::get('/profile/{user}',function(User $user){

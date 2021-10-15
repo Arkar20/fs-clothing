@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Customer;
 use Livewire\Component;
 use App\Http\Traits\ToastTrait;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class ProfileEdit extends Component
@@ -29,19 +30,21 @@ class ProfileEdit extends Component
 
     public function updateProfile()
     {
-        $value=    $this->validate([
+        $value= $this->validate([
         'name' => 'required|min:3|max:255',
         'email' => 'required|email',
         'password' => ['required','confirmed',Password::defaults()],
         'phnum1' => 'required',
         'address' => 'required|min:5|min:10|max:255',
         ]);
+
     
+
         $this->customer->update($value);
 
         $this->successAlert('Profile Updated Successfully');
 
-        
+        // $this->reset();
     
     }
     public function render()

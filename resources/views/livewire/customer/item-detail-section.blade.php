@@ -1,4 +1,12 @@
 <div>
+     <h2 class="my-5 text-gray-700 text-sm font-bold">Retail Sale</h2>
+          <div class="flex flex-wrap ">
+          <h2 class=" text-purple-700 text-md font-bold">
+              ${{$item->retail_price}}
+            <span class="font-bold text-sm text-gray-700">Above {{$item->retail_qty}}</span>
+            </h2>
+
+        </div>
      <h2 class="my-5 text-gray-700 text-sm font-bold">Available Size</h2>
           <div class="flex flex-wrap ">
             

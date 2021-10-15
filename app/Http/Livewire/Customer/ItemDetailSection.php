@@ -25,6 +25,9 @@ class ItemDetailSection extends Component
     public $selectitem;
     public $addtocartitemid;
 
+    //price (configuring retail or wholeslae price)
+    public $price;
+
     protected $rules = ['qty' => 'required'];
 
 
@@ -74,6 +77,7 @@ class ItemDetailSection extends Component
     public function checkCart()
     {
         $this->validate();
+        $this->checkRetailPrice();
        return    Cart::search(function ($cartItem, $rowId) {
                if($cartItem->id==$this->itemdetail->id ){
                 if($this->itemdetail->quantity<$cartItem->qty+$this->qty){
@@ -93,7 +97,7 @@ class ItemDetailSection extends Component
                 'id' => $this->itemdetail->id,
                 'name' => $this->itemdetail->getItemName(),
                 'qty' => $this->qty,
-                'price' => $this->item->price,
+                'price' => $this->price,
                 'weight' => 0,
                 'options' => [
                     'size' => $this->itemdetail->getItemSize(),
@@ -105,6 +109,16 @@ class ItemDetailSection extends Component
             $this->successAlert("Item Added To Cart.");
 
 
+    }
+    public function checkRetailPrice()
+    {
+        if($this->qty >= $this->item->retail_qty){
+            $this->price=$this->item->retail_price;
+        }
+        else{
+            $this->price=$this->item->price;
+
+        }
     }
       public function getDetailItem()
     {

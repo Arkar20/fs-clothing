@@ -52,6 +52,7 @@
                         <span class="badge badge-info">15% discount</span> 
                 </p>
             </div>
+           
             
 
            <livewire:customer.item-detail-section :item="$item"/>

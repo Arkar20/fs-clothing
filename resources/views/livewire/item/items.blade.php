@@ -37,7 +37,7 @@
                            
                         </ul>
                     </div>
-                    @auth
+                    @auth('web')
                      <a href="/items/register" class="w-48 flex justify-center items-center space-x-2 btn-md btn-primary rounded-md" @click="
                         ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,6 +70,8 @@
                                         <option value="Top Item">Top Items</option>
                                         <option value="Top Purchase Items">Top Purchase Items</option>
                                         <option value="Top Order Items">Top Orders Items</option>
+                                        <option value="Least Order Items">Least Order Items</option>
+                                        <option value="Least Purchase Items">Least Purchase Items</option>
                                  </select>
                 @endauth                    
                      
@@ -115,7 +117,7 @@
                            @if(request()->route()->getName()=='home.shop')
                            {{-- {{dd('here')}} --}}
                             @click="
-                                        location='{{route('shop.detail',$item->name)}}'
+                                        location='{{route('shop.detail',$item)}}'
                                         "
                             @endif
                         />
@@ -125,7 +127,7 @@
                         <svg 
                                  x-data
                                  wire:click="
-                                        selecteditemtocart({{$item->id}})
+                                        selecteditemtocart({{$item}})
                                         "
                                 @click="
                                         $dispatch('addtocart')

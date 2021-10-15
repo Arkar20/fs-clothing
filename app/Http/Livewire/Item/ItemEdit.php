@@ -21,6 +21,7 @@ class ItemEdit extends Component
     public $price;
     public $retail_price;
     public $total_qty;
+    public $retail_qty;
    
     public function refreshItem()
     {
@@ -42,6 +43,7 @@ class ItemEdit extends Component
         $this->retail_price = $item->retail_price;
         $this->desc = $item->desc;
         $this->total_qty=$item->total_qty;
+        $this->retail_qty=$item->retail_qty;
     }
     public function updateBrand()
     {
@@ -81,6 +83,15 @@ class ItemEdit extends Component
         $this->item->refresh();
         $this->closeModal();
         $this->successAlert('Price Edited Successfully!');
+    }
+    public function updateRetailQty()
+    {
+         $this->item->update([
+            'retail_qty' => $this->retail_qty,
+        ]);
+        $this->item->refresh();
+        $this->closeModal();
+        $this->successAlert('Retail Quantity Edited Successfully!');
     }
     public function updateRetailPrice()
     {

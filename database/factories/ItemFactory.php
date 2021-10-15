@@ -33,6 +33,7 @@ class ItemFactory extends Factory
             'user_id' => User::factory()->create()->id,
             'price' => $price,
             'retail_price' => $price - 10,
+            'retail_qty' => rand(5,10),
             'total_qty' => 10,
             'img1' => '/photos/items/img' . rand(1, 10) . '.jpg',
             'img2' => '/photos/items/img' . rand(1, 10) . '.jpg',

@@ -42,7 +42,7 @@ class CreateItemsTable extends Migration
             $table->string('desc');
             $table->integer('price');
             $table->integer('retail_price');
-            $table->integer('total_qty');
+            $table->integer('total_qty')->default(0);
             $table->timestamps();
         });
     }

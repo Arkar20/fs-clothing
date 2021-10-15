@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,13 +15,18 @@ class HomeController extends Controller
   }
   public function shop()
   {
+    // dd(Auth::guard('customer')->check());
     return view('customer.shop');
   }
-  public function show($name)
+  public function show(Item $item)
   {
-      $item=Item::where('name',$name)->firstorFail(); 
+      // $item=Item::where('name',$name)->firstorFail(); 
       $recommend_items=$item->where('brand_id',$item->brand_id)->take(5)->get();
 
       return view('customer.detail',compact('item','recommend_items'));
+  }
+  public function register()
+  {
+    return view('customer.auth.register');
   }
 }

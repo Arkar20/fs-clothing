@@ -143,6 +143,17 @@
                      />
 
                 </div>
+                 <div class="brand w-72 flex justify-between">
+                        <h2 class="font-semibold text-lg">Retail Quantity Limit</h2>
+                        <h2 class=" text-lg">
+                          <span class="text-blue-600">{{$item->retail_qty}}pcs</span>
+                        </h2>
+                     <x-edit-icon 
+                        @click="$dispatch('edit',{modal:'Edit Retail Qty'})"
+                     
+                     />
+
+                </div>
                  <div class="brand w-80 flex justify-between">
                         <h2 class="font-semibold text-lg">Total Quantity</h2>
                         <h2 class=" text-lg">
@@ -246,6 +257,15 @@ class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="d
 
 
        </div>
+        <div x-show="name==='Edit Retail Qty'">
+            
+                 <x-text-field
+                 label="Retail Limit Quantity" 
+                 model='retail_qty'  
+                />
+
+
+       </div>
          
 
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse ">
@@ -266,6 +286,10 @@ class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="d
             </div>    
             <div x-show="name==='Edit Retail Price'" >
                     <Button class="btn btn-accent" wire:click="updateRetailPrice()" >Update</Button>
+
+            </div>    
+            <div x-show="name==='Edit Retail Qty'" >
+                    <Button class="btn btn-accent" wire:click="updateRetailQty()" >Update</Button>
 
             </div>    
 

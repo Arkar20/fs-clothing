@@ -15,6 +15,9 @@ class ShoppingCart extends Component
     public $cartcount;
     public $stockqty;
 
+    //checking cart item quantity
+
+
     protected $listeners = ['itemaddedtocart' => 'loadcart'];
 
     public function loadcart()
@@ -60,24 +63,54 @@ class ShoppingCart extends Component
         }
 
         Cart::update($key, Cart::get($key)->qty + 1);
+        $this->checkRetailPrice($key);
+
         $this->loadcart();
         $this->emit('itemremovedfromcart');
     }
     public function decreaseCart($key)
     {
+        $cartCount=$this->checkCart($key);
+            if(!$cartCount->count()==0){
+                        $this->loadcart();
+                        return $this->errorAlert('Invalid Quantity');
+                    }
         Cart::update($key, Cart::get($key)->qty - 1);
+        $this->checkRetailPrice($key);
+
         $this->loadcart();
         $this->emit('itemremovedfromcart');
     }
     public function checkCart($key)
     {
-        $this->stockqty = ItemDetail::find(Cart::get($key)->id)->quantity;
+        if(!$key) $this->errorAlert("Cart has no Items");
+
+
+        $this->itemdetail = ItemDetail::find(Cart::get($key)->id);
         // dd($this->stockqty);
        return  Cart::search(function ($cartItem, $rowId) {
-              if($this->stockqty < $cartItem->qty+1 ) {
+              if($this->itemdetail->quantity < $cartItem->qty+1 ) {
                 return $cartItem;
             }
             });
+    }
+     public function checkRetailPrice($key)
+    {
+
+        $cartitem=Cart::get($key);
+
+        if($this->itemdetail->item->retail_qty < $cartitem->qty ){
+        
+           Cart::update($key, ['price'=>$this->itemdetail->item->retail_price]);
+        }
+        else if($this->itemdetail->item->retail_qty >= $cartitem->qty){
+          
+
+           Cart::update($key, ['price'=>$this->itemdetail->item->price]);
+
+        }
+        // $this->loadcart();
+
     }
     public function render()
     {
