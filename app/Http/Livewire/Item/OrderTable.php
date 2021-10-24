@@ -14,11 +14,22 @@ class OrderTable extends Component
     // search by keywords 
     public $search;
 
-
+    //* status filtering
+    public $status;
       //filter by start data and end date 
     public $searchStartDate;
     public $searchEndDate;
      
+    public $queryString=['search','status','searchStartDate','searchEndDate'];
+
+    // public function updatedStatus()
+    // {
+    //     if($this->status=="All" || $this->status=="")
+    //     {
+    //         $this->status = null;
+    //     }
+    // }
+
     public function render()
     {
         return view('livewire.item.order-table',
@@ -33,6 +44,7 @@ class OrderTable extends Component
                                             })
                                           
                                           ->FilterByStartEndDate($this->searchStartDate,$this->searchEndDate)
+                                          ->FilterByStatus($this->status)
 
                                                   ->latest()
                                             ->paginate(10)]);

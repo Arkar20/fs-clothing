@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Payment;
 use App\Models\OrderItemDetail;
 use App\Http\Traits\FilterFieldTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -65,6 +66,22 @@ class Order extends Model
             'quantity' => $cart->qty,
         ]);
     }
+    public function getOrderStatusClass()
+    {
+     return $this->order_status?'badge-info':'badge-error';   
+    }
+    public function getOrderStatusText()
+    {
+     return $this->order_status?'Confirmed':'Pending';   
+    }
+    public function getPaymentStatusClass()
+    {
+     return $this->payment_status?'badge-info':'badge-error';   
+    }
+    public function getPaymentStatusText()
+    {
+     return $this->payment_status?'Paid':'Pending';   
+    }
 
     public function customer()
     {
@@ -79,4 +96,8 @@ class Order extends Model
     {
         return $this->hasOne(Delivery::class);
     }
+   public function payment(Type $var = null)
+   {
+       return $this->hasOne(Payment::class);
+   }
 }

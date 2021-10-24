@@ -51,4 +51,21 @@ trait FilterFieldTrait
                                                                  ->whereDate('created_at','<=', $endDate);
                                                 });
     }
+
+    // filter by status of oders and paysments in order table listing
+    public function scopeFilterByStatus($query,$status)
+    {
+         return $query->when($status && $status=="Order Pending",function($db) {
+                                                return $db->where('order_status',false);
+                                            })
+                                           ->when($status && $status=="Order Confirmed",function($db)  {
+                                                return $db->where('order_status',true);
+                                            })
+                                           ->when($status && $status=="Payment Pending",function($db)  {
+                                                return $db->where('payment_status',false);
+                                            })
+                                           ->when($status && $status=="Payment Confirmed",function($db)  {
+                                                return $db->where('payment_status',true);
+                                            });
+    }
 }

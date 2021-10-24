@@ -78,15 +78,49 @@
     </tbody>
   </table>
 </div>
-
+ 
 </div>
+  <div class="overflow-x-auto m-10 shadow-xl border-1 border-gray-200">
+      <x-order-detail-card 
+          :totalAmount="$order->total_amount"
+          :tax="0"
+          :subtotal="$order->total_amount"
+        />
+       
+  </div>
+  <div class="overflow-x-auto m-10 shadow-xl border-1 border-gray-200">
+  
+    <div class=" my-3 py-3  ">
+  <div class="overflow-x-auto shadow-xl border-1 border-gray-200 px-10"> 
+    <p class="font-semibold text-2xl mt-10 mb-5">Order Status</p>
+    <div class="w-full flex-col space-y-4">
+      <div class="w-full flex justify-between text-md">
+        <p>Order Status</p>
+        <p class="badge {{$order->getOrderStatusClass()}}">{{$order->getOrderStatusText()}}</p>
+      </div>
+      {{-- <div class="w-full flex justify-between text-md">
+        <p>Payment Status</p>
+        <p class="badge {{$order->getPaymentStatusClass()}}">{{$order->getPaymentStatusText()}}</p>
+        <button class="btn">Hello</button>
+      </div> --}}
+      
+    </div>
+  </div>
+  <div class="overflow-x-auto shadow-xl border-1 border-gray-200 px-10"> 
+    <p class="font-semibold text-2xl mt-10 mb-5">Payment Status</p>
+    <div class="w-full flex-col space-y-4">
 
+      <div class="w-full flex justify-between text-md">
+        <p>Payment Status</p>
+        <p class="badge {{$order->getPaymentStatusClass()}}">{{$order->getPaymentStatusText()}}</p>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+  </div>
 
-   <x-order-detail-card 
-    :totalAmount="$order->total_amount"
-    :tax="0"
-    :subtotal="$order->total_amount"
-  />
+   
  
 </div>
 

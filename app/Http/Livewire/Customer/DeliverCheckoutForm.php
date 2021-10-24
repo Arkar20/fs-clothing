@@ -23,34 +23,54 @@ class DeliverCheckoutForm extends Component
            if(!auth()->guard('customer')->check()){
 
              return $this->errorAlert('Please Login First!');
-        } // return redirect()->route('customer.payment');
+        } 
 
-          if (!$this->totalCart() == 0) {
-
-                  $order=$this->saveOrderRecords();
-
-                return redirect()->route('customer.payment',$order);
-        }         
+          if ($this->totalCart() == 0)   $this->errorAlert('No Items In the Cart, Cannot Order!');
+              
+          $this->payment=="cod"
+                  ?$this->saveOrderRecordsWithCODpayment()
+                  :$this->saveOrderRecordsWithPrepaidpayment();
         
-        return $this->errorAlert('No Items In the Cart, Cannot Order!');
+
+        
 
     }
-      public function saveOrderRecords()
+    public function saveOrderRecordsWithCODpayment()
     {
-        
+      $this->validate();
 
+       
+         $order=Order::create([
+            'customer_id' => auth()->id()?:1,
+            'total_amount' => (int) Cart::total(0, false, false),
+        ]);
+        $order->delivery()->create(['address'=>$this->address,'note'=>$this->note]);
+
+        $order->payment()->create(['payment_method'=>"COD"]);
+                  
+        // session()->flash('purchased', 'Purchase Completed');
+       
+
+         return redirect()->route('home.shop')->with('ordered',"Order Completed");
+    }
+      public function saveOrderRecordsWithPrepaidpayment()
+    {
+ 
         $this->validate();
 
-        $order=Order::create([
+       
+         $order=Order::create([
             'customer_id' => auth()->id()?:1,
             'total_amount' => (int) Cart::total(0, false, false),
         ]);
 
+      
         $order->delivery()->create(['address'=>$this->address,'note'=>$this->note]);
 
-        session()->flash('purchased', 'Purchase Completed');
+       
+        session()->flash('ordered', 'Order SuccessFul Please Confirm Your Payment!');
 
-        return $order;
+        return redirect()->route('customer.payment',$order);
     }
       public function totalCart()
     {

@@ -17,8 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained();
             $table->string('payment_method');
-            $table->string('payment_screenshot');
-            $table->string('desc');
+            $table->string('payment_screenshot')->nullable()->default(null);
+            $table->string('desc')->nullable()->default(null);
             $table->timestamps();
         });
     }

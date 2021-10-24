@@ -106,20 +106,19 @@
                 @forelse ($items as $item)
                 {{-- start of product single --}}
                
-                <div 
-                
+                <a 
+                    @if(!auth()->guard('web')->check() || auth()->guard('customer')->check() )
+                      href="{{route('shop.detail',$item->id)}}"
+                    @endif
                 wire:click='selectToDisplay({{$item}})'
                 class="product-single border border-1 border-gray-200 shadow-lg hover:border-gray-900 cursor-pointer" >
-                    <div >
+                    <div>
                         <img 
                             src="{{$item->img1}}"
                            width="100%"
-                           @if(request()->route()->getName()=='home.shop')
+                           
                            {{-- {{dd('here')}} --}}
-                            @click="
-                                        location='{{route('shop.detail',$item)}}'
-                                        "
-                            @endif
+                          
                         />
                     </div>
                     <div class="w-full bg-white flex justify-between items-center px-2 py-3">
@@ -138,7 +137,7 @@
                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                     </div>
-                </div>
+                </a>
                   {{-- end of product single --}}
 
                 @empty

@@ -12,10 +12,19 @@ class Supplier extends Model
 {
     use HasFactory, TableHeadersTrait, FilterFieldTrait;
 
+    public $withCount=['purchases'];
+
+    // public $with=['purchases'];  
+
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
     }
+    public function gettotalamount()
+    {
+        return $this->purchases->sum('total_amount');
+    }
+ 
 
     protected $guarded = [];
 }

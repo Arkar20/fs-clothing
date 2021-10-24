@@ -20,7 +20,7 @@
 
 
 
- <x-livewire-alert::scripts />
+<x-livewire-alert::scripts />
 
 
 
@@ -134,6 +134,7 @@ class="position-relative">
 
     @livewireScripts
 
+@livewireChartsScripts
 
 
 </body>

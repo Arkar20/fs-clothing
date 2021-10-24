@@ -9,6 +9,7 @@ use App\Http\Traits\ToastTrait;
 use App\Http\Traits\CloseModelTrait;
 use Illuminate\Support\ViewErrorBag;
 use App\Http\Traits\TableHeadersTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class SupplierSection extends Component
@@ -29,6 +30,10 @@ class SupplierSection extends Component
     //filter by start data and end date 
     public $searchStartDate;
     public $searchEndDate;
+
+
+    //* status to filer the supplier by their rate of purchasing
+    public $status;
 
     protected $listeners = ['confirmed', 'cancelled'];
 
@@ -109,16 +114,27 @@ class SupplierSection extends Component
 
     public function render()
     {
+
+      
+
+
         return view('livewire.supplier.supplier-section', [
-            'suppliers' => Supplier::FilterSearch('name', $this->search)
-                ->with('purchases')
+            'suppliers' => Supplier::
+                 leftJoin('purchases', 'suppliers.id', '=', 'purchases.supplier_id')
+                ->select('suppliers.*',DB::raw('sum(purchases.total_amount) as total_purchases') )
+                ->groupBy('suppliers.id')
+                ->withCount('purchases')
+                ->FilterSearch('name', $this->search)
                 ->FilterSearch('email', $this->search)
                 ->FilterSearch('company_name', $this->search)
                 ->FilterSearch('hotline1', $this->search)
                 ->FilterSearch('hotline2', $this->search)
                 ->FilterSearch('address', $this->search)
+                ->when($this->status && $this->status=="Top Supplier of All Time",function($query){
+                    
+                    return $query->orderBy('total_purchases','desc');
+                })
                
-             
                 ->latest()
                 ->paginate(10),
 

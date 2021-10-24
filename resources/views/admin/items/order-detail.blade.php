@@ -103,6 +103,44 @@
    
    
 </div>
+
+ <div class="overflow-x-auto m-10 shadow-xl border-1 border-gray-200">
+  
+    <div class=" my-3 py-3  ">
+ 
+  <div class="overflow-x-auto shadow-xl border-1 border-gray-200 px-10"> 
+    <p class="font-semibold text-2xl mt-10 mb-5">Payment Status</p>
+    <div class="w-full flex-col space-y-4">
+     
+    @if($order->payment != null)
+         <h3>Payment ScreenShot</h3>
+         <img src="{{asset($order->payment->payment_screenshot)}}"/>
+    @endif
+
+    <div class="screenshot flex justify-center border-1 border-gray-400 rounded-lg shadow-xl">
+    <div class="w-full flex justify-between text-md">
+        <p>Payment Status</p>
+        <livewire:admin.payment-confirm :order="$order" />
+      </div>
+
+    </div>
+
+  </div>
+     
+  </div>
+   <div class="overflow-x-auto shadow-xl border-1 border-gray-200 px-10"> 
+    <p class="font-semibold text-2xl mt-10 mb-5">Order Status</p>
+    <div class="w-full flex-col space-y-4">
+      <livewire:admin.item-confirm :order="$order"/>
+      
+      
+    </div>
+  </div>
+
+  </div>
+  </div>
+
+   
 </div>
 
 

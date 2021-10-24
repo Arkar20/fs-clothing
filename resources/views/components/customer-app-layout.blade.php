@@ -14,6 +14,7 @@
  <x-livewire-alert::scripts />
 
 
+
     <style>
            [x-cloak=""] { display: none; }
     </style>
@@ -28,6 +29,13 @@
         content=document.querySelector('.content')
         content.scrollIntoView({behavior:'smooth'})
      })
+    @if(session()->has('ordered'))
+
+     Swal.fire({
+                icon: 'success',
+                title: '{{session()->get('ordered')}}',
+                        })
+    @endif
     ">
     
     @include('customer.layouts.navbar')

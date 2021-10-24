@@ -5,8 +5,10 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Category;
 use App\Models\Purchase;
+use App\Models\Supplier;
 use App\Models\ItemDetail;
 use App\Models\PurchaseItem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Item\SizeSection;
 use App\Http\Controllers\HomeController;
@@ -58,7 +60,9 @@ Route::get('/checkout',function(){
 })->name('customer.checkout');
 
 
+Route::post('/payment/create',[PaymentController::class,'store'])->name('payment.store');
 Route::get('/payment/{order}',[PaymentController::class,'show'])->name('customer.payment');
+
 
 Route::prefix('admin')->middleware('auth:web')->group(function(){
 
@@ -89,6 +93,7 @@ Route::get('/purchase', function () {
 
 
 Route::get('/purchase/manage', function() {
+    
     return view('admin.items.purchase-table');
 })->name('purchase.table');
 //fake id for item details
@@ -127,7 +132,20 @@ Route::get('/staffs/manage',[UserController::class,'manageStaff'])->name('staffs
 
 
 });
+// Route::get('/check',function(){
+//         $suppliers=Supplier::leftJoin('purchases', 'suppliers.id', '=', 'purchases.supplier_id')
+//                 ->select('suppliers.*',DB::raw('sum(purchases.total_amount) as total_purchases') )
+//                 ->groupBy('suppliers.id')
+//                 ->pluck('total_purchases');
 
+//         $total_sales=$suppliers->map(function ($value) {
+//            if(!$value)  return 0;
+//            return $value;
+//         });
+
+
+//         return $total_sales;
+// });
 
 
 require __DIR__ . '/auth.php';
