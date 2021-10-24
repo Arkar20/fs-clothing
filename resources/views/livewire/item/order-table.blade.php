@@ -43,17 +43,17 @@
   <table class="table w-full table-zebra">
     <thead>
       <tr>
-        <th>Purchase ID</th> 
+        <th>Order ID</th> 
         <th>Customer Name</th> 
         <th>Total Amount ($)</th>
-        <th>Purchase Date</th>
+        <th>Order Date</th>
         <th>Order Status</th>
         <th>Payment Status</th>
         <th>~</th>
       </tr>
     </thead> 
     <tbody>
-    @forelse ($purchase_records as $index=>$record)
+    @forelse ($order_records as $index=>$record)
         <tr>
         <th>ORD-00000{{$record->id}}</th> 
         <td>{{$record->customer->name}}</td> 
@@ -79,7 +79,12 @@
       
     </tbody>
   </table>
-  {{$purchase_records->links()}}
+  {{$order_records->links()}}
+</div>
+  {{-- {{dd($order_records)}} --}}
+
+<div>
+  <livewire:admin.orders-chart :orders="$order_records"/>
 </div>
 
 </div>

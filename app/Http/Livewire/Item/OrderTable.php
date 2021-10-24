@@ -33,7 +33,7 @@ class OrderTable extends Component
     public function render()
     {
         return view('livewire.item.order-table',
-                    ['purchase_records'=>Order::
+                    ['order_records'=>Order::
                                             when(auth()->guard('customer')->check(),function($query){
                                                 return $query->where('customer_id',auth()->guard('customer')->id());
                                             })

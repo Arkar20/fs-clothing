@@ -4,6 +4,7 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use App\Models\ItemDetail;
@@ -132,20 +133,15 @@ Route::get('/staffs/manage',[UserController::class,'manageStaff'])->name('staffs
 
 
 });
-// Route::get('/check',function(){
-//         $suppliers=Supplier::leftJoin('purchases', 'suppliers.id', '=', 'purchases.supplier_id')
-//                 ->select('suppliers.*',DB::raw('sum(purchases.total_amount) as total_purchases') )
-//                 ->groupBy('suppliers.id')
-//                 ->pluck('total_purchases');
+Route::get('/check',function(){
+    $customers=  Customer::leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
+                ->select('customers.*',DB::raw('sum(orders.total_amount) as total_orders','orders.created_at') )
+                ->groupBy('customers.id')
+                
+                ->orderBy('total_orders','desc')->get()->take(10);
 
-//         $total_sales=$suppliers->map(function ($value) {
-//            if(!$value)  return 0;
-//            return $value;
-//         });
-
-
-//         return $total_sales;
-// });
+        return $customers;
+});
 
 
 require __DIR__ . '/auth.php';
