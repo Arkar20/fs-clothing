@@ -17,10 +17,7 @@ class OrdersChart extends Component
     public $date;
     public $filterno=10;
 
-   public function mount()
-   {
-              
-   }
+  
 
     public function render()
     {
