@@ -9,7 +9,13 @@
           {{-- wire:init='fetchAllComments' --}}
                
                 >
-               
+
+             @if (!auth()->check())
+
+                <p>Please Login First.</p>    
+             @endif
+      @auth('web')
+          
                {{-- start of commens   --}}
               @if($comments)
                {{-- start of commens   --}}
@@ -68,5 +74,6 @@
                 </form>
 
             </div>
+      @endauth         
 
         </div>

@@ -73,6 +73,11 @@
 </td>
       </tr>
     @empty
+      <tr>
+        <td>
+          No Orders Has Made.
+        </td>
+      </tr>
         
     @endforelse
    
@@ -84,7 +89,9 @@
   {{-- {{dd($order_records)}} --}}
 
 <div>
-  <livewire:admin.orders-chart :orders="$order_records"/>
+  @if($order_records->count() && auth()->guard('web')->check())
+    <livewire:admin.orders-chart :orders="$order_records"/>
+  @endif
 </div>
 
 </div>

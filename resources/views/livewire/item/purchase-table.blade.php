@@ -49,7 +49,11 @@
 </td>
       </tr>
     @empty
-        
+        <tr>
+          <td>
+             No Purchase Has Made Yet.
+          </td>
+        </tr>
     @endforelse
    
       

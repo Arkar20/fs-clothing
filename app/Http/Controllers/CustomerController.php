@@ -39,7 +39,7 @@ class CustomerController extends Controller
 
         Auth::guard('customer')->login($customer);
 
-        return redirect(RouteServiceProvider::CUSTOMER_HOME);
+       return redirect()->route('home.shop');
 
 
     }
@@ -81,7 +81,7 @@ class CustomerController extends Controller
     public function orderlists()
     {
         if(!auth()->guard('customer')->user()) abort(403);
-
+        
         return view('customer.orderlists');
     }
     public function orderdetail(Order $order)
