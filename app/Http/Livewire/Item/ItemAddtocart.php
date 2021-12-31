@@ -8,6 +8,8 @@ use App\Models\Color;
 use Livewire\Component;
 use App\Models\ItemDetail;
 use App\Http\Traits\ToastTrait;
+use Illuminate\Support\Facades\DB;
+use App\Http\helpers\AdminShoppingCart;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ItemAddtocart extends Component
@@ -15,95 +17,43 @@ class ItemAddtocart extends Component
     use ToastTrait;
 
     protected $listeners = ['itemtoaddtocart', 'confirmedForAddtoCart', 'cancelled'];
+
+
     protected $rules = ['qty' => 'required'];
 
-    public $item;
-    public $size;
-    public $color;
-    public $addtocartitemid;
-    public $itemdetail;
-    public $availableqty;
-    public $sizes;
-
-    public $colors;
-    public $selectitem;
-
-    public $qty;
-
-    public function updatedSize()
+    public $item,$size,$color,$itemdetail,$availableqty,$qty;
+    
+    public function itemtoaddtocart(Item $item)  //* get from the parent ( listeners events )
     {
-        $this->addtocartitemid = null;
-        $itemdetail = ItemDetail::where('item_id', $this->item->id)->where(
-            'size_id',
-            $this->size
-        );
-        $this->colors = $itemdetail->get();
-        $this->color = $itemdetail->get()->first()->color_id;
-        $this->availableqty = $itemdetail->sum('quantity');
+        $this->item=$item;
+        $this->itemdetail = $item->itemdetails;
+        
     }
 
-    public function updatedColor()
+    public function updated()
     {
-        $this->selectitem = ItemDetail::where('item_id', $this->item->id)
-            ->where('size_id', $this->size)
-            ->where('color_id', $this->color)
-            ->get()
-            ->first();
-        $this->availableqty =
-            $this->selectitem->quantity ?: $this->selectitem->item->total_qty;
-        $this->addtocartitemid = $this->selectitem->id;
+
+        $this->itemdetail = $this->item
+                                ->itemdetails()
+                                ->filterDetail(['size'=>$this->size,'color'=>false]); //* got item detial relevalt to size
+
+        $this->availableqty = $this->itemdetail->sum('quantity');  //! configure the avaialble qty
     }
 
-    public function itemtoaddtocart(Item $item)
-    {
-        $this->item = $item;
-        // $this->sizes = $item
-        //     ->itemdetails()
-        //     ->pluck('id', 'size_id')
-        //     ->map(function ($value) {
-        //         return ItemDetail::find($value);
-        //     });
-    }
+
+    
     public function add()
     {
-        $this->validate();
-        try {
-            Cart::setGlobalTax(0);
-            $this->itemdetail = $this->getDetailItem();
-            // dd($this->itemdetail);
-            $this->addintocart();
+            $this->validate();
+        
+            (new AdminShoppingCart())->addintocart($this->itemdetail->first(),$qty=$this->qty);
+    
             $this->emit('itemaddedtocart');
-        } catch (ErrorException $e) {
-            $this->confirmDialog(
-                "Sorry You Don't Have Size and Color for This Item, GO TO INVENTORY?"
-            );
-        }
+
     }
-    public function confirmedForAddtoCart()
+    public function confirmedForAddtoCart() //! when the user click ok in dialog redirect 
     {
         return redirect()->route('items.edit', $this->item->name);
-    }
-    public function getDetailItem()
-    {
-        return ItemDetail::where('item_id', $this->item->id)
-            ->where('size_id', $this->size)
-            ->where('color_id', $this->color)
-            ->get()
-            ->first();
-    }
-    public function addintocart()
-    {
-        Cart::add([
-            'id' => $this->itemdetail->id,
-            'name' => $this->itemdetail->getItemName(),
-            'qty' => $this->qty,
-            'price' => $this->item->price,
-            'weight' => 0,
-            'options' => [
-                'size' => $this->itemdetail->getItemSize(),
-                'color' => $this->itemdetail->getItemColor(),
-            ],
-        ]);
     }
 
     public function render()

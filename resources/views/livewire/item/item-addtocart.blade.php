@@ -53,12 +53,12 @@
             @endforelse 
             @endif --}}
              {{-- <x-dropdownfield label="Choose Available Color" :options="$colors" model="addtocartitemid" table="colors"/> --}}
-               @if($colors)
+               @if($itemdetail && $size)
              <select class="my-2 w-full rounded-xl border-1 border-purple-400 focus:border-purple-600" 
              wire:model='color'>
                        
 
-                                @forelse ($colors as $color)
+                                @forelse ($itemdetail as $color)
                                             <option 
                                                 value="{{$color->color_id}}">
                                                 

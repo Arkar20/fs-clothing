@@ -44,17 +44,7 @@ class ShoppingCart extends Component
     }
     public function increaseCart($key)
     {
-        // $this->stockqty = ItemDetail::find(Cart::get($key)->id)->quantity;
-
-        // if ($this->stockqty < Cart::get($key)->qty + 1) {
-        //     Cart::update($key, Cart::get($key)->qty);
-        //     $this->loadcart();
-        //     $this->emit('itemremovedfromcart');
-
-        //     return $this->errorAlert(
-        //         'Your Quantity Exceeded the Instock Quantity.'
-        //     );
-        // }
+       
         $cartCount=$this->checkCart($key);
 
         if(!$cartCount->count()==0){
@@ -71,7 +61,7 @@ class ShoppingCart extends Component
     public function decreaseCart($key)
     {
         
-            $this->getItemDetail($key);
+        $this->getItemDetail($key);
     
         $cartqty=Cart::get($key)->qty;
 
@@ -121,7 +111,7 @@ class ShoppingCart extends Component
            Cart::update($key, ['price'=>$this->itemdetail->item->price]);
 
         }
-        // $this->loadcart();
+     
 
     }
     public function render()

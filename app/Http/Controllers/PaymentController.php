@@ -18,7 +18,7 @@ class PaymentController extends Controller
    {
        $order=Order::find($request->order_id);
       $data= $request->validate(['payment_method'=>"required",'payment_screenshot'=>"required",'desc'=>'required|min:3|max:255']);
-    // dd($order);
+    
         $order->payment()->create([ "payment_method"=>$request->payment_method,
                                 "payment_screenshot"=>$request->payment_screenshot->storeAs('payment',$order->customer->name.'-'.$order->id.''.$request->payment_screenshot->getClientOriginalName()),
                                 "desc"=>$request->desc

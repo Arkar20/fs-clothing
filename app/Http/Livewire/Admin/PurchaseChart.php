@@ -17,7 +17,7 @@ class PurchaseChart extends Component
     public function render()
     {
         $searchmonth=Carbon::parse($this->date)->format('m');
-        // $searchyear=date_format($this->date,'yyyy');
+        
 
        $suppliers=Supplier::leftJoin('purchases', 'suppliers.id', '=', 'purchases.supplier_id')
                 ->select('suppliers.*',DB::raw('sum(purchases.total_amount) as total_purchases','purchases.created_at') )
@@ -26,15 +26,7 @@ class PurchaseChart extends Component
                     return $query->whereMonth('purchases.created_at',$searchmonth)->whereYear('purchases.created_at','2021');
                 })
                 ->latest()->get();
-        
-            // dd($query->get());
-        //   $suppliers=$query
-        //         ->pluck('total_purchases');
-
-        // $total_sales=$suppliers->map(function ($value) {
-        //    if(!$value)  return 0;
-        //    return $value;
-        // });
+   
         //!overall purchases
         $overallpurchase=Purchase::when($this->date,function($query) use($searchmonth){
                     return $query->whereMonth('purchases.created_at',$searchmonth)->whereYear('purchases.created_at','2021');
@@ -46,14 +38,11 @@ class PurchaseChart extends Component
     
      $column= (new ColumnChartModel())
                 ->setTitle('Total Purchases By Supplier');
-
-                    
-           
-                foreach($suppliers as $supplier){
+            
+        foreach($suppliers as $supplier){
                 $column->addColumn($supplier->name,$supplier->total_purchases,'#'.rand(888888,999999));
                 $pieChart->addSlice($supplier->name,$supplier->total_purchases/$overallpurchase*100,'#'.rand(900000,999999));
-
-            }
+                 }
             
 
         return view('livewire.admin.purchase-chart',[

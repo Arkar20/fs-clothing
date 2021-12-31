@@ -48,6 +48,10 @@ class ItemDetail extends Model
     {
         return $this->color->color;
     }
+    public function getItemImage()
+    {
+        return $this->color->img1;
+    }
     public function item()
     {
         return $this->belongsTo(Item::class);
@@ -59,6 +63,29 @@ class ItemDetail extends Model
     public function color()
     {
         return $this->belongsTo(Color::class);
+    }
+     public function getDetails($sizeId,$colorId)
+    {
+        return $this->item()
+                    ->where('size_id', $this->size)
+                    ->where('color_id', $this->color)
+                    ->get()
+                    ->first();
+    }
+    public function scopeFilterDetail($query,$data)
+    {
+        if($data['size']){ $query->where('size_id',$data['size']);}
+       
+        if($data['color']) { $query->where('color_id',$data['color']);}
+      
+       return $query->groupBy('id')->get();
+
+    }
+      public function getUniqueSize()
+    {
+        return $this->itemdetails()
+            ->pluck('id', 'size_id')
+            ->filter();
     }
     
   

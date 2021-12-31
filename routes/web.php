@@ -81,7 +81,7 @@ Route::get('/items', function () {
     return view('admin.items.index');
 })->name('item.showroom');
 
-Route::get('/items/{item:name}', function (Item $item) {
+Route::get('/items/{item:id}', function (Item $item) {
     return view('admin.items.edit', [
         'item' => $item->load('itemdetails'),
     ]);
