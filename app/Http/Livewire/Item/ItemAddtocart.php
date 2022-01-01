@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Color;
 use Livewire\Component;
 use App\Models\ItemDetail;
+use App\Http\helpers\AdminCart;
 use App\Http\Traits\ToastTrait;
 use Illuminate\Support\Facades\DB;
 use App\Http\helpers\AdminShoppingCart;
@@ -42,12 +43,12 @@ class ItemAddtocart extends Component
 
 
     
-    public function add()
+    public function add(AdminCart $cart)
     {
             $this->validate();
         
-            (new AdminShoppingCart())->addintocart($this->itemdetail->first(),$qty=$this->qty);
-    
+            $cart->addintocart($this->itemdetail->first(),$qty=$this->qty);
+     
             $this->emit('itemaddedtocart');
 
     }

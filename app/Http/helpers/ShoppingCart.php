@@ -1,22 +1,17 @@
 <?php
 
+
 namespace App\Http\helpers;
 
-use ErrorException;
-use App\Models\ItemDetail;
-use App\Http\Traits\ToastTrait;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class AdminShoppingCart
-{
-    use ToastTrait;
-
-    public function addintocart(ItemDetail $itemdetail,$qty)
+abstract class ShoppingCart {
+    
+    public function add($itemdetail,$qty)
     {
         Cart::setGlobalTax(0);
-      try{  
 
-        Cart::add([
+         Cart::add([
             'id' => $itemdetail->id,
             'name' => $itemdetail->getItemName(),
             'qty' => $qty,
@@ -27,11 +22,6 @@ class AdminShoppingCart
                 'color' => $itemdetail->getItemColor(),
             ],
         ]);
-    }
-        catch (ErrorException $e) {
-            $this->confirmDialog(
-                "Sorry You Don't Have Size and Color for This Item, GO TO INVENTORY?"
-            );
-        }
+   
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Size;
 use App\Models\Color;
 use App\Models\PurchaseItem;
 use Illuminate\Database\Eloquent\Model;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Propaganistas\LaravelFakeId\RoutesWithFakeIds;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,6 +37,8 @@ class ItemDetail extends Model
             ]);
         });
     }
+
+    //!helpers
     public function getItemName()
     {
         return $this->item->name;
@@ -86,6 +89,19 @@ class ItemDetail extends Model
         return $this->itemdetails()
             ->pluck('id', 'size_id')
             ->filter();
+    }
+    public function itemIsInCart()
+    {
+        return Cart::search(function ($cartItem, $rowId)  {
+            return $cartItem->id === $this->id;
+        });
+    }
+    public function getQuantityInCart($qty)
+    {
+        if($this->itemIsInCart()->count()){
+            return $this->itemIsInCart()->first()->qty + $qty;
+        }
+       return $qty;
     }
     
   

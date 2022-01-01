@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-    
+        // $this->app->bind('admincart',function(){
+        //         return new AdminShoppingCart();
+        // });
     }
 
     /**
@@ -26,8 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-           $this->app->bind('admincart',function(){
-            return new AdminShoppingCart();
-       });
+          
     }
 }
