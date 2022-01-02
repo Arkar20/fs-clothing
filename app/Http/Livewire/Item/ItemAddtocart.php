@@ -11,6 +11,7 @@ use App\Http\helpers\AdminCart;
 use App\Http\Traits\ToastTrait;
 use Illuminate\Support\Facades\DB;
 use App\Http\helpers\AdminShoppingCart;
+use App\Http\helpers\CustomerCart;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ItemAddtocart extends Component
@@ -43,7 +44,7 @@ class ItemAddtocart extends Component
 
 
     
-    public function add(AdminCart $cart)
+    public function add(CustomerCart $cart)
     {
             $this->validate();
         

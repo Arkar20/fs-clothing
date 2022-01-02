@@ -5,38 +5,21 @@ namespace App\Http\helpers;
 use App\Models\ItemDetail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class ConfigurePrice {
-     public $price;
+class ConfigurePrice  //! the price will change based on the customer add to cart qty 
+{
 
-    private $key,$itemdetail,$cuttentQtyInCart;
-
-    public function __construct($key)
+     public function setPrice(ItemDetail $itemdetail,$qty)
     {
-        $cart=Cart::get($key);
-        
-        $this->cuttentQtyInCart=$cart->qty;
+  
+        // configure the price
+        $newPrice=$itemdetail->configurePrice($qty);
 
-
-        $this->itemdetail = ItemDetail::find($cart->id);
-        
-    }
-
-    public function setExpectedQty($qty)
-    {
-        return $expectedQty= $this->cuttentQtyInCart+$qty;   
-    }
-    public function setPrice($qty)
-    {
-        // if($this->itemdetail->qty < $this->setExpectedQty($qty)){
-        //     throw new Exception("Throw Error Invalid Quantity");
-        // }
-        if($this->setExpectedQty($qty) >= $this->itemdetail->item->retail_qty){
-                return $this->itemdetail->item->retail_price;
-        }
-        
-        return $this->itemdetail->item->price;
-
-
+        //then update the cart
+            //find the cart key with item detail id
+            $key=$itemdetail->getCartItemKey();
+              
+            //then update
+           Cart::update($key, ['price'=>$newPrice]);
 
     }
 }

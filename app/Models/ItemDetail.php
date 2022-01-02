@@ -90,6 +90,16 @@ class ItemDetail extends Model
             ->pluck('id', 'size_id')
             ->filter();
     }
+    public function findItemDetialInCart()
+    {
+        return Cart::search(function ($cartItem, $rowId)  {
+                return $cartItem->id === $this->id;
+        });
+    }
+    public function getCartItemKey()
+    {
+        return $this->findItemDetialInCart()->first()->rowId;
+    }
     public function itemIsInCart()
     {
         return Cart::search(function ($cartItem, $rowId)  {
@@ -102,6 +112,16 @@ class ItemDetail extends Model
             return $this->itemIsInCart()->first()->qty + $qty;
         }
        return $qty;
+    }
+    public function configurePrice($qty)
+    {
+          //if the qty is exceeded, then set the price to retail price 
+        //if not default one
+         if( $this->item->retail_qty <=  $this->getQuantityInCart($qty))
+        {
+            return $this->item->retail_price;
+        }
+        return $this->item->price;
     }
     
   

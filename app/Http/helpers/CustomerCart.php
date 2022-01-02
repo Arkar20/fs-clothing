@@ -6,6 +6,7 @@ use ErrorException;
 use App\Models\ItemDetail;
 use App\Http\Traits\ToastTrait;
 use App\Http\helpers\ShoppingCart;
+use App\Http\helpers\ConfigurePrice;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CustomerCart extends ShoppingCart
@@ -17,6 +18,7 @@ class CustomerCart extends ShoppingCart
     public function __construct()
     {
         $this->checkQty=new CheckQty();
+        $this->configPrice= new ConfigurePrice();
         
     }
 
@@ -25,6 +27,8 @@ class CustomerCart extends ShoppingCart
          $this->checkQty->checkQty($itemdetail,$qty);
 
          $this->add($itemdetail,$qty);
+
+         $this->configPrice->setPrice($itemdetail,$qty);
        
     }
     
