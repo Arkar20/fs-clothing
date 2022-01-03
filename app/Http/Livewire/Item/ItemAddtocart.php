@@ -9,9 +9,10 @@ use Livewire\Component;
 use App\Models\ItemDetail;
 use App\Http\helpers\AdminCart;
 use App\Http\Traits\ToastTrait;
-use Illuminate\Support\Facades\DB;
-use App\Http\helpers\AdminShoppingCart;
 use App\Http\helpers\CustomerCart;
+use Illuminate\Support\Facades\DB;
+use App\Http\helpers\MyCartInterface;
+use App\Http\helpers\AdminShoppingCart;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ItemAddtocart extends Component
@@ -23,7 +24,7 @@ class ItemAddtocart extends Component
 
     protected $rules = ['qty' => 'required'];
 
-    public $item,$size,$color,$itemdetail,$availableqty,$qty;
+    public $item,$size,$color=null,$itemdetail,$availableqty,$qty,$colors;
     
     public function itemtoaddtocart(Item $item)  //* get from the parent ( listeners events )
     {
@@ -31,20 +32,33 @@ class ItemAddtocart extends Component
         $this->itemdetail = $item->itemdetails;
         
     }
-
+   
     public function updated()
     {
 
         $this->itemdetail = $this->item
                                 ->itemdetails()
-                                ->filterDetail(['size'=>$this->size,'color'=>false]); //* got item detial relevalt to size
+                                ->filterDetail(['size'=>$this->size,'color'=>$this->color]); //* got item detial relevalt to size
 
         $this->availableqty = $this->itemdetail->sum('quantity');  //! configure the avaialble qty
+
+    }
+    public function updatedSize()
+    {
+          $this->itemdetail = $this->item
+                                ->itemdetails()
+                                ->filterDetail(['size'=>$this->size,'color'=>$this->color]);
+
+        $this->availableqty = $this->itemdetail->sum('quantity');  //! configure the avaialble qty
+
+        $this->colors=$this->itemdetail;
+
+        
     }
 
 
     
-    public function add(CustomerCart $cart)
+    public function add(MyCartInterface $cart)
     {
          try{ 
             $this->validate();

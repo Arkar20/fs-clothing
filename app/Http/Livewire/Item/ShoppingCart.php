@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\ItemDetail;
 use App\Http\Traits\ToastTrait;
 use App\Http\helpers\CustomerCart;
+use App\Http\helpers\MyCartInterface;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShoppingCart extends Component
@@ -43,7 +44,7 @@ class ShoppingCart extends Component
         $this->loadcart();
         $this->emit('itemremovedfromcart');
     }
-    public function increaseCart(ItemDetail $itemdetail,CustomerCart $cart)
+    public function increaseCart(ItemDetail $itemdetail,MyCartInterface $cart)
     {
 
         $cart->addintocart($itemdetail,$qty=1);
@@ -52,7 +53,7 @@ class ShoppingCart extends Component
        
       
     }
-    public function decreaseCart(ItemDetail $itemdetail,CustomerCart $cart)
+    public function decreaseCart(ItemDetail $itemdetail,MyCartInterface $cart)
     {
          $cart->addintocart($itemdetail,$qty=-1);
         

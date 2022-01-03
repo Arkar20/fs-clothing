@@ -15,7 +15,6 @@ class HomeController extends Controller
   }
   public function shop()
   {
-    // dd(Auth::guard('customer')->check());
     return view('customer.shop');
   }
   public function show(Item $item)

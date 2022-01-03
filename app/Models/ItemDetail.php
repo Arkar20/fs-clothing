@@ -117,7 +117,7 @@ class ItemDetail extends Model
     {
           //if the qty is exceeded, then set the price to retail price 
         //if not default one
-         if( $this->item->retail_qty <=  $this->getQuantityInCart($qty))
+         if( $this->item->retail_qty <  $this->getQuantityInCart($qty))
         {
             return $this->item->retail_price;
         }
