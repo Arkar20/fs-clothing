@@ -4,8 +4,9 @@ namespace App\Http\helpers;
 
 use App\Models\ItemDetail;
 use App\Http\helpers\ShoppingCart;
+use App\Http\helpers\MyCartInterface;
 
-class AdminCart extends ShoppingCart
+class AdminCart extends ShoppingCart implements MyCartInterface
 {
 
     public function addintocart(ItemDetail $itemdetail,$qty)

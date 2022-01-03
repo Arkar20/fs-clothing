@@ -4,14 +4,12 @@ namespace App\Http\helpers;
 
 use ErrorException;
 use App\Models\ItemDetail;
-use App\Http\Traits\ToastTrait;
 use App\Http\helpers\ShoppingCart;
 use App\Http\helpers\ConfigurePrice;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Http\helpers\MyCartInterface;
 
-class CustomerCart extends ShoppingCart
+class CustomerCart extends ShoppingCart implements MyCartInterface
 {
-    use ToastTrait;
 
     private $checkQty;
 
@@ -24,6 +22,7 @@ class CustomerCart extends ShoppingCart
 
     public function addintocart(ItemDetail $itemdetail,$qty)
     {
+
          $this->checkQty->checkQty($itemdetail,$qty);
 
          $this->add($itemdetail,$qty);

@@ -46,11 +46,17 @@ class ItemAddtocart extends Component
     
     public function add(CustomerCart $cart)
     {
+         try{ 
             $this->validate();
         
             $cart->addintocart($this->itemdetail->first(),$qty=$this->qty);
      
             $this->emit('itemaddedtocart');
+        } 
+        
+        catch(ErrorException $e){
+            $this->errorAlert($e->getMessage());
+        }
 
     }
     public function confirmedForAddtoCart() //! when the user click ok in dialog redirect 
